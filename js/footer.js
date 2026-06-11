@@ -13,15 +13,19 @@ function renderFooter() {
       <div class="footer-links">
         <div class="footer-col">
           <h4>App</h4>
-          <a href="#app">Spin Now</a>
-          <a href="#wheel-types">Wheel Types</a>
-          <a href="#features">Features</a>
-          <a href="#how-to-use">How to Use</a>
+          <a href="/#app">Spin Now</a>
+          <a href="/#wheel-types">Wheel Types</a>
+          <a href="/#features">Features</a>
+          <a href="/#how-to-use">How to Use</a>
         </div>
         <div class="footer-col">
           <h4>Info</h4>
-          <a href="#faq">FAQ</a>
-          <a href="#about">About</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+          <a href="/cookies-policy">Cookies Policy</a>
+          <a href="/about">About</a>          
         </div>
       </div>
     </div>
