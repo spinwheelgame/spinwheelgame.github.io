@@ -8,11 +8,11 @@ function renderHeader() {
         <span class="logo-text">SpinWheel<span class="logo-accent">Game</span></span>
       </a>
       <nav class="nav-links" id="main-nav" aria-label="Main navigation">
-        <a href="#app">Spin Now</a>
-        <a href="#wheel-types">Wheel Types</a>
-        <a href="#features">Features</a>
-        <a href="#how-to-use">How to Use</a>
-        <a href="#faq">FAQ</a>
+        <a href="/#app">Spin Now</a>
+        <a href="/#wheel-types">Wheel Types</a>
+        <a href="/#features">Features</a>
+        <a href="/#how-to-use">How to Use</a>
+        <a href="/#faq">FAQ</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
