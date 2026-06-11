@@ -24,8 +24,7 @@ function renderFooter() {
           <a href="/contact">Contact</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Use</a>
-          <a href="/cookies-policy">Cookies Policy</a>
-          <a href="/about">About</a>          
+          <a href="/cookies-policy">Cookies Policy</a>                   
         </div>
       </div>
     </div>
