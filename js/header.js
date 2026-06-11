@@ -1,5 +1,5 @@
 function renderHeader() {
-  const header = document.createElement('header');
+  const header = document.createElement('header'); 
   header.className = 'site-header';
   header.innerHTML = `
     <div class="header-inner">
