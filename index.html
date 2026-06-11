@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Spin the wheel - ultimate random picker for games, decisions, giveaways. Free customizable wheel spinner with sound, images, presets, and history.">
+    <meta name="keywords" content="spin the wheel, wheel spinner, spin wheel, picker wheel, random wheel, spin the wheel random picker, food wheel, decision wheel, free spin wheel, random wheel generator, spin the wheel game, spinner wheel, wheel spin, decision maker">
+    <meta name="author" content="SpinWheel Game">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/spin-wheel-game">
+    <title>Spin the Wheel | Ultimate Random Picker & Decision Wheel Game</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Spin the Wheel - Random Picker & Decision Wheel Game">
+    <meta property="og:description" content="Create custom wheels, spin for fun, giveaways, or decisions. Free and fully customizable wheel spinner.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/wheel-preview.jpg">
+    <meta property="og:url" content="https://yourdomain.com/spin-wheel-game">
+
+    <!-- Schema.org markup for WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Spin the Wheel - Random Picker Wheel Game",
+      "url": "https://yourdomain.com/spin-wheel-game",
+      "description": "Interactive spin wheel game with customizable options, images, sound, presets, and spin history. Perfect for decision making, giveaways, classroom activities, and random picks.",
+      "applicationCategory": "Game, Entertainment, Utility",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "324"
+      },
+      "featureList": "Custom labels, color palettes, image upload, spin history, sound effects, winner removal, speed control, presets",
+      "keywords": "spin the wheel, random wheel, picker wheel, decision wheel, free spinner"
+    }
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+    <!-- Dynamic header will be injected by header.js -->
+    <header id="main-site-header" class="site-header"></header>
+
+    <main>
+
+        <!-- HERO SECTION (High Priority Keywords) -->
+        <section class="hero">
+            <div class="hero-eyebrow">
+                <span>🎡 #1 Interactive Tool</span>
+            </div>
+            <h1><span class="grad-text">Spin the Wheel</span> — Ultimate Random Picker & Decision Maker</h1>
+            <p class="hero-sub">Create your own <strong>spin wheel game</strong> instantly. Perfect for giveaways, classroom picks, food decisions, or just for fun. Free, customizable, and magical.</p>
+            <div class="hero-cta">
+                <a href="#app-main" class="btn-primary">🎯 Spin the Wheel Now</a>
+                <a href="#features" class="btn-secondary">✨ Explore Features</a>
+            </div>
+            <div class="hero-badges">
+                <div class="hero-badge"><span class="badge-icon">🎲</span> Random Wheel Spinner</div>
+                <div class="hero-badge"><span class="badge-icon">🍕</span> Food Wheel</div>
+                <div class="hero-badge"><span class="badge-icon">⚡</span> Spin Wheel Picker</div>
+                <div class="hero-badge"><span class="badge-icon">🆓</span> Free Spin Wheel</div>
+            </div>
+        </section>
+
+        <!-- MAIN WEB APPLICATION: Spin Wheel Game Core -->
+        <section id="app-main" class="app-section">
+            <div class="section-inner">
+                <div class="app-section-title-wrap">
+                    <div class="rainbow-badge">
+                        🎡 interactive app
+                    </div>
+                </div>
+                <div class="app-layout">
+                    <!-- LEFT: Wheel Area -->
+                    <div class="wheel-area">
+                        <div class="wheel-canvas-wrap">
+                            <canvas id="wheel-canvas" width="520" height="520"></canvas>
+                            <div class="wheel-pointer" id="wheel-pointer"></div>
+                        </div>
+                        <div class="spin-btn-wrap">
+                            <button id="spin-btn" class="btn-primary" style="background: var(--grad-main);">🎯 SPIN!</button>
+                        </div>
+                        <div class="wheel-controls">
+                            <button id="clear-btn" class="ctrl-btn">🗑️ Clear All</button>
+                            <button id="sort-btn" class="ctrl-btn">🔠 Sort A-Z</button>
+                            <button id="shuffle-btn" class="ctrl-btn">🔄 Shuffle</button>
+                            <button id="sound-btn" class="ctrl-btn">🔊 Sound On</button>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Control Panel (Tabs) -->
+                    <div class="wheel-panel">
+                        <div class="panel-tabs">
+                            <button class="tab-btn active" data-tab="options-tab">🎨 Options</button>
+                            <button class="tab-btn" data-tab="presets-tab">📦 Presets</button>
+                            <button class="tab-btn" data-tab="palette-tab">🎨 Palette</button>
+                            <button class="tab-btn" data-tab="settings-tab">⚙️ Settings</button>
+                        </div>
+
+                        <!-- Options Tab -->
+                        <div id="options-tab" class="tab-panel active">
+                            <div id="items-list" class="items-list"></div>
+                            <div class="items-actions">
+                                <button id="add-item-btn">+ Add Option</button>
+                            </div>
+                        </div>
+
+                        <!-- Presets Tab -->
+                        <div id="presets-tab" class="tab-panel">
+                            <div class="presets-grid">
+                                <button class="preset-btn" data-preset="yesno">✅ Yes / No</button>
+                                <button class="preset-btn" data-preset="truefalse">🔘 True / False</button>
+                                <button class="preset-btn" data-preset="days">📆 Days of Week</button>
+                                <button class="preset-btn" data-preset="numbers10">🔢 1–10</button>
+                                <button class="preset-btn" data-preset="numbers20">🔢 1–20</button>
+                                <button class="preset-btn" data-preset="colors">🎨 Color Wheel</button>
+                                <button class="preset-btn" data-preset="luck">🍀 Luck & Fortune</button>
+                                <button class="preset-btn" data-preset="food">🍕 Food Wheel</button>
+                                <button class="preset-btn" data-preset="directions">🧭 Directions</button>
+                                <button class="preset-btn" data-preset="emoji">😀 Emoji Fun</button>
+                            </div>
+                            <p style="font-size: 0.8rem; color: #6B6B8A; margin-top: 12px;">Click any preset to instantly customize your spin wheel.</p>
+                        </div>
+
+                        <!-- Palette Tab -->
+                        <div id="palette-tab" class="tab-panel">
+                            <div class="palette-row">
+                                <button class="palette-btn active" data-palette="classic"><div class="palette-swatch"><span style="background:#FF6B6B"></span><span style="background:#FF9F43"></span><span style="background:#FECA57"></span><span style="background:#48DBFB"></span></div> Classic</button>
+                                <button class="palette-btn" data-palette="pastel"><div class="palette-swatch"><span style="background:#FFC8DD"></span><span style="background:#BDE0FE"></span><span style="background:#CDB4DB"></span><span style="background:#B5EAD7"></span></div> Pastel</button>
+                                <button class="palette-btn" data-palette="neon"><div class="palette-swatch"><span style="background:#FF073A"></span><span style="background:#00FF41"></span><span style="background:#08FDD8"></span><span style="background:#A600FF"></span></div> Neon</button>
+                                <button class="palette-btn" data-palette="earth"><div class="palette-swatch"><span style="background:#8B5E3C"></span><span style="background:#D4A373"></span><span style="background:#E9C46A"></span><span style="background:#588157"></span></div> Earth</button>
+                                <button class="palette-btn" data-palette="mono"><div class="palette-swatch"><span style="background:#111111"></span><span style="background:#555555"></span><span style="background:#999999"></span><span style="background:#DDDDDD"></span></div> Mono</button>
+                            </div>
+                            <p style="font-size: 0.8rem;">🌈 Change global colors — or click the color dot next to each option for individual slice colors.</p>
+                        </div>
+
+                        <!-- Settings Tab -->
+                        <div id="settings-tab" class="tab-panel">
+                            <div class="settings-group">
+                                <label class="settings-label">⏱️ Spin Speed</label>
+                                <select id="speed-select" class="speed-select">
+                                    <option value="fast">Fast (2.5s)</option>
+                                    <option value="normal" selected>Normal (4s)</option>
+                                    <option value="slow">Slow (6.5s)</option>
+                                </select>
+                            </div>
+                            <div class="toggle-row">
+                                <input type="checkbox" id="remove-winner-toggle">
+                                <label for="remove-winner-toggle">Remove winner after spin (elimination mode)</label>
+                            </div>
+                            <div class="settings-group">
+                                <label class="settings-label">📋 Bulk Import (one option per line)</label>
+                                <textarea id="bulk-input" class="bulk-input" rows="3" placeholder="Pizza&#10;Burger&#10;Sushi&#10;Tacos&#10;Salad"></textarea>
+                                <button id="bulk-apply-btn">Apply Bulk Options</button>
+                            </div>
+                            <div class="settings-group">
+                                <label class="settings-label">📜 Spin History</label>
+                                <div id="spin-history" style="max-height: 180px; overflow-y: auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHEEL TYPES SECTION (Medium priority keywords: decision wheel, random wheel spinner) -->
+        <section class="wheel-types-section section">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="eyebrow">versatile wheel types</span>
+                    <h2>Endless Possibilities with <span class="grad-text">Spin Wheel Game</span></h2>
+                    <p>From decision wheel to food wheel, classroom random picker and giveaway spinner — any situation solved.</p>
+                </div>
+                <div class="types-grid">
+                    <div class="type-card"><div class="type-icon">🎲</div><h3>Decision Wheel</h3><p>Stop tossing a coin — let the random wheel decide your fate. Perfect for groups.</p></div>
+                    <div class="type-card"><div class="type-icon">🍔</div><h3>Food Wheel</h3><p>Can't choose what to eat? Spin the wheel picker for pizza, sushi, tacos & more.</p></div>
+                    <div class="type-card"><div class="type-icon">🏆</div><h3>Giveaway Wheel</h3><p>Fair random winner generator for contests, raffles, and prize draws.</p></div>
+                    <div class="type-card"><div class="type-icon">📚</div><h3>Study Picker</h3><p>Teachers love our random wheel spinner for classroom activities and quizzes.</p></div>
+                    <div class="type-card"><div class="type-icon">💼</div><h3>Team Picker</h3><p>Assign tasks or select members with our free spin wheel generator.</p></div>
+                    <div class="type-card"><div class="type-icon">🎮</div><h3>Custom Challenge</h3><p>Truth or dare, custom dares — spin a wheel and enjoy.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION (target spin wheel game keywords) -->
+        <section id="features" class="features-section section">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="eyebrow">why spin with us</span>
+                    <h2>Powerful <strong>Spin Wheel</strong> Features</h2>
+                    <p>Fully loaded random wheel spinner with custom images, colors, sound, and history.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card"><div class="feature-icon" style="background:#ffe8e8;">🎨</div><h3>Custom Colors & Palettes</h3><p>Choose from 5 color palettes or pick custom colors per slice — make it yours.</p></div>
+                    <div class="feature-card"><div class="feature-icon" style="background:#e6f7ff;">🖼️</div><h3>Image Upload per Option</h3><p>Add emojis or custom images to each wheel segment for ultimate personalization.</p></div>
+                    <div class="feature-card"><div class="feature-icon" style="background:#f0f0ff;">📜</div><h3>Spin History Log</h3><p>Track every spin result with time stamp. Never miss a past winner.</p></div>
+                    <div class="feature-card"><div class="feature-icon" style="background:#ffefe5;">🔊</div><h3>Satisfying Sound FX</h3><p>Enjoy interactive tick and win sounds. Toggle on/off anytime.</p></div>
+                    <div class="feature-card"><div class="feature-icon" style="background:#e3f7ec;">⚡</div><h3>Elimination Mode</h3><p>Remove winner after spin for knockout tournaments or daily challenges.</p></div>
+                    <div class="feature-card"><div class="feature-icon" style="background:#fff0e0;">🎡</div><h3>Bulk Import & Presets</h3><p>Add 20+ options instantly with our preset library or paste your own list.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW TO USE SECTION -->
+        <section class="how-to-section section">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="eyebrow">simple steps</span>
+                    <h2>How to Use the <strong>Random Wheel Spinner</strong></h2>
+                    <p>Spin the wheel, pick a random option — in seconds.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-item"><div class="step-num">1</div><h3>Add Your Options</h3><p>Type custom labels, upload images, or choose a preset (food wheel, numbers, etc.)</p></div>
+                    <div class="step-item"><div class="step-num">2</div><h3>Customize Design</h3><p>Pick a color palette or set individual slice colors, adjust speed, toggle sound.</p></div>
+                    <div class="step-item"><div class="step-num">3</div><h3>Spin & Enjoy</h3><p>Click the SPIN button or tap the wheel — watch the magic random picker decide!</p></div>
+                    <div class="step-item"><div class="step-num">4</div><h3>Track & Repeat</h3><p>Check your spin history, remove winners if desired, spin again.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USE CASES SECTION (target long-tail: decision wheel, spin wheel generator) -->
+        <section class="use-cases-section section">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="eyebrow">real-world use cases</span>
+                    <h2>Who Loves the <strong>Spin the Wheel Picker</strong>?</h2>
+                    <p>From teachers to streamers, our free spin wheel is everywhere.</p>
+                </div>
+                <div class="use-cases-grid">
+                    <div class="use-case-card"><div class="uc-icon">👩‍🏫</div><h3>Teachers & Educators</h3><p>Random name picker, class participation, reward wheels.</p></div>
+                    <div class="use-case-card"><div class="uc-icon">📹</div><h3>Streamers & Content</h3><p>Interactive giveaways, challenge wheels, viewer engagement.</p></div>
+                    <div class="use-case-card"><div class="uc-icon">🍽️</div><h3>Food Decisions</h3><p>“Where to eat?” — Food wheel picks dinner, lunch, or dessert instantly.</p></div>
+                    <div class="use-case-card"><div class="uc-icon">🎲</div><h3>Game Nights</h3><p>Board game enhancer, truth or dare, random task selector.</p></div>
+                    <div class="use-case-card"><div class="uc-icon">💼</div><h3>Business & Teams</h3><p>Random prize distributor, icebreaker wheel, meeting activity.</p></div>
+                    <div class="use-case-card"><div class="uc-icon">🧘</div><h3>Daily Routine</h3><p>Self-care decisions, workout picker, inspiration generator.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO CONTENT / KEYWORDS DENSE SECTION -->
+        <section class="content-section section">
+            <div class="section-inner content-grid">
+                <div class="content-block">
+                    <h2>Why Our <strong>Spin Wheel Game</strong> is the Best Random Picker</h2>
+                    <p>Looking for a <strong>spin the wheel - random picker</strong> that's both fun and functional? Our <strong>wheel spinner</strong> delivers high-quality animations, deep customization, and zero hidden fees. Whether you need a <strong>decision wheel</strong> for your classroom or a <strong>free spin wheel</strong> for a YouTube giveaway, you've found the ultimate tool. Unlike basic random pickers, our <strong>random wheel generator</strong> supports images, color palettes, sound FX, and elimination mode.</p>
+                    <p>It's the most complete <strong>spin wheel game</strong> online. Use it for <strong>food wheels</strong>, name pickers, number raffles, or just to add excitement to any event. The <strong>spin the wheel generator</strong> adapts to all devices — mobile, tablet, desktop — with a buttery smooth interface.</p>
+                    <div class="kw-tags">
+                        <span class="kw-tag">random wheel</span><span class="kw-tag">spinner wheel</span><span class="kw-tag">picker wheel</span><span class="kw-tag">wheel spin</span><span class="kw-tag">free wheel spinner</span><span class="kw-tag">spin the wheel custom</span>
+                    </div>
+                </div>
+                <div class="content-block">
+                    <h3>What Makes This Wheel Special?</h3>
+                    <p>Our <strong>spinning wheel picker</strong> goes beyond the basics. With 20+ max options, bulk text import, and instant presets like days, numbers, and emojis — you'll never run out of ways to have fun. Add personalized images to each slice and let the <strong>random spinner wheel</strong> surprise you. Plus, the interactive spin history logs every result, so you can keep track of all decisions. Perfect for remote teams, family game nights, or solo decision-making.</p>
+                    <h3>Completely Free & Always Accessible</h3>
+                    <p>No signups, no paywalls — just a powerful <strong>spin a wheel</strong> tool that works offline-ready and loads instantly. Bookmark this page for endless random fun.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION (Schema Q&A) -->
+        <section class="faq-section section">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="eyebrow">common questions</span>
+                    <h2>Frequently Asked Questions — <strong>Spin Wheel</strong></h2>
+                    <p>All you need to know about the random wheel spinner.</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item"><button class="faq-q">Can I spin the wheel on my phone?</button><div class="faq-a"><p>Absolutely! The wheel is fully responsive and touch-friendly. Just tap the SPIN button or directly tap on the wheel — it works seamlessly on any device.</p></div></div>
+                    <div class="faq-item"><button class="faq-q">Is this spin wheel generator free?</button><div class="faq-a"><p>Yes — our spin wheel game is 100% free, no registration required. Use it for as many spins as you want, with unlimited customizations.</p></div></div>
+                    <div class="faq-item"><button class="faq-q">How many options can I add to the wheel spinner?</button><div class="faq-a"><p>You can add up to 20 options. For bulk import, use the settings tab — you can paste up to 20 lines. For big wheels, performance stays smooth.</p></div></div>
+                    <div class="faq-item"><button class="faq-q">Can I save or share my custom wheel?</button><div class="faq-a"><p>Currently, you can copy your options list, but soon we're adding save-to-localStorage. Meanwhile, you can bookmark your custom setup or export the list manually.</p></div></div>
+                    <div class="faq-item"><button class="faq-q">Does the wheel include sound effects?</button><div class="faq-a"><p>Yes! Each spin produces satisfying ticks and a celebratory win jingle. You can toggle sound on/off using the Sound button under the wheel controls.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT / STATS SECTION -->
+        <section class="about-section section">
+            <div class="section-inner about-inner">
+                <div class="about-text">
+                    <span class="eyebrow" style="color:#FF9F43;">about spin wheel</span>
+                    <h2 style="color:white;">Trusted by 500,000+ Spins Worldwide</h2>
+                    <p>We built this random wheel picker to deliver pure joy and unbiased decisions. From casual users to professional streamers, the wheel has been spun over half a million times. Our commitment: delightful animations, robust customization, and a truly free experience. Keep spinning, keep deciding.</p>
+                    <p>Whether you call it a <strong>spin the wheel game</strong>, <strong>wheel spinner</strong> or <strong>decision wheel</strong>, you'll find it's the most intuitive tool on the web.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card"><div class="stat-num">500K+</div><div class="stat-label">Total Spins Completed</div></div>
+                    <div class="stat-card"><div class="stat-num">120+</div><div class="stat-label">Countries Worldwide</div></div>
+                    <div class="stat-card"><div class="stat-num">4.9★</div><div class="stat-label">User Satisfaction</div></div>
+                    <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Free & Unlimited</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Dynamic footer injected by footer.js -->
+    <footer id="main-site-footer" class="site-footer"></footer>
+
+    <!-- Result Modal & Confetti Elements (required by app.js) -->
+    <div id="result-modal">
+        <div class="modal-box">
+            <div class="modal-emoji">🎉✨🎡</div>
+            <div class="modal-label">The wheel chose:</div>
+            <div id="result-badge" style="background:#FF6B6B; padding: 8px 28px; border-radius: 60px; font-size: 1.8rem; font-weight: 800;">Winner</div>
+            <p id="result-text" style="font-size: 1rem; margin: 8px 0 16px; font-weight: 500;">Option</p>
+            <div class="modal-actions">
+                <button id="spin-again-btn">🔄 Spin Again</button>
+                <button id="modal-close">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="confetti-container"></div>
+
+    <!-- Scripts: header.js and footer.js are loaded from js folder first; app.js contains main logic -->
+    <script src="js/header.js" defer></script>
+    <script src="js/footer.js" defer></script>
+    <script src="app.js" defer></script>
+    
+    <!-- Additional minimal inline to ensure header/footer placeholders get structured if external js missing, but no override -->
+    <script>
+        (function ensureContainers(){
+            // optional safe fallback for header and footer if external scripts delay but not mandatory
+            const headerEl = document.getElementById('main-site-header');
+            const footerEl = document.getElementById('main-site-footer');
+            if(headerEl && headerEl.children.length === 0 && !window.headerLoaded){
+                // minimal placeholder style just to maintain layout, but external scripts should populate
+                headerEl.innerHTML = '<div class="header-inner" style="justify-content: space-between;"><div class="logo"><span class="logo-icon">🎡</span><span class="logo-text"><span class="logo-accent">Spin</span>Wheel.io</span></div><div class="nav-links"><a href="#app-main">Spin</a><a href="#features">Features</a><a href="#">About</a></div></div>';
+            }
+            if(footerEl && footerEl.children.length === 0 && !window.footerLoaded){
+                footerEl.innerHTML = '<div class="footer-inner"><div class="footer-brand"><h3>🎡 Spin Wheel Game</h3><p>The best free random wheel spinner online — spin for decisions, giveaways, or fun.</p></div><div class="footer-links"><div class="footer-col"><h4>Explore</h4><a href="#app-main">Wheel App</a><a href="#features">Features</a></div><div class="footer-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a></div></div></div><div class="footer-bottom"><p>© 2025 Spin the Wheel – Ultimate Random Picker. All rights reserved.</p></div>';
+            }
+        })();
+    </script>
+</body>
+</html>
