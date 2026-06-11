@@ -1,5 +1,5 @@
 function renderFooter() {
-  const footer = document.createElement('footer');
+  const footer = document.createElement('footer'); 
   footer.className = 'site-footer';
   footer.innerHTML = `
     <div class="footer-inner">
