@@ -1,6 +1,6 @@
 /* ===== SPIN WHEEL GAME - MAIN APP ===== */
 
-const WheelApp = (() => {
+const WheelApp = (() => { 
 
   /* ---- STATE ---- */
   const state = {
