@@ -8,7 +8,7 @@ function renderHeader() {
         <span class="logo-text">SpinWheel<span class="logo-accent">Game</span></span>
       </a>
       <nav class="nav-links" id="main-nav" aria-label="Main navigation">
-        <a href="/#app">Spin Now</a>
+        <a href="/#app-main">Spin Now</a>
         <a href="/#wheel-types">Wheel Types</a>
         <a href="/#features">Features</a>
         <a href="/#how-to-use">How to Use</a>
