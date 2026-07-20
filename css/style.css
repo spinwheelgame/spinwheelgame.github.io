@@ -76,44 +76,43 @@ body {
 }
 .logo-accent { color: var(--accent-1); }
 .nav-links {
-  display: flex; gap: 8px; align-items: center;
+  display: flex;
+  gap: 8px;
+  align-items: center;
   margin-left: auto;
 }
-.nav-links a {
-  text-decoration: none; color: var(--ink-2);
-  font-weight: 600; font-size: 0.92rem;
-  padding: 6px 14px; border-radius: 20px;
-  transition: all 0.2s;
-}
-.nav-links a:hover { background: var(--cream-3); color: var(--accent-1); }
-.hamburger {
-  display: none;
-  flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer;
-  padding: 8px; margin-left: auto;
-}
-.hamburger span {
-  width: 24px; height: 2px;
-  background: var(--ink);
-  border-radius: 2px;
-  transition: all 0.3s;
-}
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
 @media (max-width: 768px) {
-  .hamburger { display: flex; }
-  .nav-links {
-    position: fixed; top: 68px; left: 0; right: 0;
-    background: var(--white);
-    flex-direction: column; gap: 4px;
-    padding: 20px; box-shadow: var(--shadow-md);
-    transform: translateY(-110%);
-    transition: transform 0.3s ease;
+  .hamburger { 
+    display: flex; 
   }
-  .nav-links.open { transform: translateY(0); }
-  .nav-links a { width: 100%; text-align: center; padding: 12px; font-size: 1rem; }
+  
+  .nav-links {
+    position: fixed;
+    top: -100vh; /* Use -100vh instead of transform */
+    left: 0;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    transition: top 0.3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 68px);
+    overflow-y: auto;
+  }
+  
+  .nav-links.open { 
+    top: 68px; /* Position below header when open */
+  }
+  
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
 }
 
 /* ===== HERO ===== */
