@@ -21,13 +21,41 @@ function renderHeader() {
   `;
   document.body.prepend(header);
 
-  // Hamburger toggle
+  // Create overlay for mobile menu
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  overlay.id = 'nav-overlay';
+  document.body.appendChild(overlay);
+
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('main-nav');
-  hamburger.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', open);
-    hamburger.classList.toggle('active', open);
+  const overlayEl = document.getElementById('nav-overlay');
+
+  function toggleMenu(open) {
+    const isOpen = open !== undefined ? open : nav.classList.toggle('open');
+    nav.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.classList.toggle('active', isOpen);
+    overlayEl.classList.toggle('active', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu());
+
+  // Close menu when overlay is clicked
+  overlayEl.addEventListener('click', () => toggleMenu(false));
+
+  // Close menu when a link is clicked
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      toggleMenu(false);
+      hamburger.focus();
+    }
   });
 
   // Sticky shadow
