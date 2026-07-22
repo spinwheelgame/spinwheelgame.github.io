@@ -12,6 +12,7 @@ function renderHeader() {
         <a href="/#wheel-types">Wheel Types</a>
         <a href="/#features">Features</a>
         <a href="/#how-to-use">How to Use</a>
+        <a href="/blog">Blog</a>
         <a href="/#faq">FAQ</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
