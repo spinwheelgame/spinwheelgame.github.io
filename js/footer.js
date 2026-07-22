@@ -20,6 +20,7 @@ function renderFooter() {
         </div>
         <div class="footer-col">
           <h4>Info</h4>
+          <a href="/blog">Blog</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
           <a href="/privacy">Privacy Policy</a>
