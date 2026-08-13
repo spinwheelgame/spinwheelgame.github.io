@@ -248,7 +248,7 @@ const WheelApp = (() => {
     const n = state.items.length;
     const arc = (2 * Math.PI) / n;
     // Pointer at top = -PI/2 relative to 0
-    const angle = ((-state.currentAngle + Math.PI / 2) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+    const angle = ((-state.currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
     const winIndex = Math.floor(angle / arc) % n;
     const winner = state.items[winIndex];
 
