@@ -20,9 +20,9 @@ function renderFooter() {
         </div>
         <div class="footer-col">
           <h4>Games</h4>
-          <a href="/dice-roller-game">🎲 Dice Roller</a>
-          <a href="/memory-match-game">🧠 Memory Match</a>
-          <a href="/number-guessing-game">🔢 Number Guessing</a>
+          <a href="/dice-roller">🎲 Dice Roller</a>
+          <a href="/memory-match">🧠 Memory Match</a>
+          <a href="/number-guessing">🔢 Number Guessing</a>
           <a href="/rock-paper-scissors">✊ Rock Paper Scissors</a>
         </div>
         <div class="footer-col">
