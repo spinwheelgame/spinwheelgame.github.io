@@ -10,8 +10,7 @@ function renderHeader() {
       <nav class="nav-links" id="main-nav" aria-label="Main navigation">
         <a href="/#app-main">Spin Now</a>
         <a href="/#wheel-types">Wheel Types</a>
-        <a href="/#features">Features</a>
-        <a href="/#how-to-use">How to Use</a>
+        <a href="/#features">Features</a>        
         
         <!-- Games Dropdown -->
         <div class="nav-dropdown">
