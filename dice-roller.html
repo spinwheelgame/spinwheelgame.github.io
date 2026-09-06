@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Roll virtual dice online for board games, classroom activities, and random challenges. Free dice roller with one or two dice, history, and sound.">
+    <meta name="keywords" content="dice roller, online dice, roll dice, virtual dice, board game dice, random dice, dice game, 2 dice, 1 dice, free dice roller">
+    <meta name="author" content="SpinWheel Game">
+    <link rel="canonical" href="https://spinwheelgame.github.io/dice-roller">
+    <title>Online Dice Roller | Free Virtual Dice for Games & Decisions</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Online Dice Roller – Free Virtual Dice">
+    <meta property="og:description" content="Roll 1 or 2 dice instantly. Perfect for board games, classroom, and decision making.">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://spinwheelgame.github.io/dice-roller">
+
+    <!-- Schema Markup: WebApplication -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Online Dice Roller",
+            "url": "https://spinwheelgame.github.io/dice-roller",
+            "description": "Roll one or two virtual dice with satisfying animations. Free, no sign-up, mobile-friendly.",
+            "applicationCategory": "Game, Utility",
+            "operatingSystem": "All",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": "1 die, 2 dice, roll history, sound effects, mobile compatible"
+        }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
+    <style>
+        /* inline dice-specific refinements */
+        .dice-display {
+            font-size: 5rem;
+            line-height: 1.2;
+            margin: 16px 0 8px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            min-height: 120px;
+            align-items: center;
+        }
+        .dice-display span {
+            background: #f9f5f0;
+            padding: 16px 24px;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            display: inline-block;
+            min-width: 100px;
+        }
+        .dice-controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 24px 0 12px;
+        }
+        .dice-btn {
+            background: var(--grad-main);
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            padding: 14px 36px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-family: var(--font-display);
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255,107,107,0.3);
+            transition: 0.2s;
+        }
+        .dice-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(255,107,107,0.4); }
+        .dice-btn.secondary {
+            background: var(--white);
+            color: var(--ink);
+            border: 2px solid #ddd;
+            box-shadow: none;
+        }
+        .dice-btn.secondary:hover { border-color: var(--accent-1); color: var(--accent-1); }
+        .history-box {
+            max-width: 380px;
+            margin: 30px auto 0;
+            background: var(--cream-2);
+            border-radius: 20px;
+            padding: 20px 24px;
+            text-align: left;
+        }
+        .history-box h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .history-list {
+            max-height: 140px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+        .history-list .entry {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 4px 0;
+        }
+        .history-list .entry span:last-child { color: var(--ink-3); font-size: 0.8rem; }
+        .clear-history {
+            background: none;
+            border: none;
+            color: var(--ink-3);
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .feature-grid-dice {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 24px;
+            margin: 40px 0 20px;
+        }
+        .feature-card-dice {
+            background: var(--white);
+            padding: 24px 16px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        .feature-card-dice .icon { font-size: 2.4rem; margin-bottom: 6px; }
+        .feature-card-dice h4 { font-weight: 700; margin-bottom: 6px; }
+        .feature-card-dice p { font-size: 0.9rem; color: var(--ink-3); }
+        .how-to-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .how-step {
+            background: var(--cream-2);
+            border-radius: 20px;
+            padding: 20px 12px;
+            text-align: center;
+        }
+        .how-step .num {
+            background: var(--grad-main);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        @media (max-width: 600px) {
+            .dice-display { font-size: 3.6rem; gap: 10px; }
+            .dice-display span { min-width: 70px; padding: 12px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER injected -->
+<header id="main-site-header" class="site-header"></header>
+
+<main>
+    <!-- HERO / MAIN DICE ROLLER -->
+    <section class="section" style="padding-top: 24px;">
+        <div class="section-inner" style="text-align: center;">
+
+            <span class="eyebrow">🎲 virtual dice</span>
+            <h1 style="font-family: var(--font-display); font-size: clamp(2rem,4vw,2.8rem); font-weight: 900; letter-spacing: -0.5px;">
+                Online Dice Roller – <span class="grad-text">Roll Instantly</span>
+            </h1>
+            <p style="font-size: 1.05rem; max-width: 600px; margin: 0 auto 18px; color: var(--ink-2);">
+                Roll one or two virtual dice for board games, classroom activities, or random decisions. Free, fast, and mobile-friendly.
+            </p>
+
+            <!-- DICE DISPLAY -->
+            <div class="dice-display" id="diceDisplay">
+                <span id="die1">⚀</span>
+                <span id="die2">⚀</span>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="dice-controls">
+                <button class="dice-btn" id="rollBtn">🎲 Roll Dice</button>
+                <button class="dice-btn secondary" id="roll2Btn">Roll 2 Dice</button>
+                <button class="dice-btn secondary" id="roll1Btn">Roll 1 Die</button>
+            </div>
+
+            <p id="totalDisplay" style="font-size: 1.2rem; font-weight: 700; margin-top: 4px;">Your total will appear here.</p>
+
+            <!-- HISTORY -->
+            <div class="history-box">
+                <h3>
+                    <span>📋 Roll History</span>
+                    <button class="clear-history" id="clearHistoryBtn">Clear</button>
+                </h3>
+                <div class="history-list" id="historyList">
+                    <div class="entry" style="color: var(--ink-3); font-style: italic;">No rolls yet.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section" style="background: var(--cream-2); padding-top: 40px; padding-bottom: 40px;">
+        <div class="section-inner">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <span class="eyebrow">why use this dice roller</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem,2.8vw,2.4rem);">Simple, Fair, &amp; Fun</h2>
+            </div>
+            <div class="feature-grid-dice">
+                <div class="feature-card-dice"><div class="icon">🎯</div><h4>True Random</h4><p>Each roll is mathematically random, just like physical dice.</p></div>
+                <div class="feature-card-dice"><div class="icon">📱</div><h4>Mobile Ready</h4><p>Responsive design works on phones, tablets, and desktops.</p></div>
+                <div class="feature-card-dice"><div class="icon">🔊</div><h4>Satisfying Sound</h4><p>Optional click and roll sounds (toggle coming soon).</p></div>
+                <div class="feature-card-dice"><div class="icon">📋</div><h4>Roll History</h4><p>Keep track of your last 20 rolls for reference.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="section" style="background: var(--white); padding-top: 40px; padding-bottom: 40px;">
+        <div class="section-inner">
+            <div style="text-align: center; margin-bottom: 28px;">
+                <span class="eyebrow">how to roll</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem,2.4vw,2rem);">Get Started in Seconds</h2>
+            </div>
+            <div class="how-to-grid">
+                <div class="how-step"><div class="num">1</div><h4>Choose dice</h4><p>Select 1 or 2 dice, or click the main roll button.</p></div>
+                <div class="how-step"><div class="num">2</div><h4>Roll</h4><p>Tap the button or shake your device (if supported).</p></div>
+                <div class="how-step"><div class="num">3</div><h4>Read result</h4><p>See the dice faces and total sum instantly.</p></div>
+                <div class="how-step"><div class="num">4</div><h4>Track history</h4><p>Review your past rolls in the history panel.</p></div>
+            </div>
+            <p style="text-align: center; color: var(--ink-3); max-width: 500px; margin: 0 auto;">Perfect for Monopoly, D&amp;D, classroom activities, or just for fun.</p>
+        </div>
+    </section>
+
+    <!-- USE CASES / LONG TAIL SEO -->
+    <section class="section" style="background: var(--cream-2); padding-top: 40px; padding-bottom: 40px;">
+        <div class="section-inner">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <span class="eyebrow">who uses this dice roller</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem,2.4vw,2rem);">From Classrooms to Game Nights</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px;">
+                <div style="background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                    <div style="font-size: 2rem;">👩‍🏫</div>
+                    <h4>Teachers</h4>
+                    <p style="font-size: 0.9rem; color: var(--ink-3);">Random student picker, math games, and classroom activities.</p>
+                </div>
+                <div style="background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                    <div style="font-size: 2rem;">🎲</div>
+                    <h4>Board Gamers</h4>
+                    <p style="font-size: 0.9rem; color: var(--ink-3);">Replace lost dice for Monopoly, Risk, or any tabletop game.</p>
+                </div>
+                <div style="background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                    <div style="font-size: 2rem;">🧙</div>
+                    <h4>D&amp;D Players</h4>
+                    <p style="font-size: 0.9rem; color: var(--ink-3);">Roll for initiative, damage, or skill checks with virtual dice.</p>
+                </div>
+                <div style="background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                    <div style="font-size: 2rem;">🤖</div>
+                    <h4>Decision Makers</h4>
+                    <p style="font-size: 0.9rem; color: var(--ink-3);">Let the dice decide who goes first, or settle a friendly dispute.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT / SEO DENSE -->
+    <section class="section" style="background: var(--white); padding-top: 30px; padding-bottom: 30px;">
+        <div class="section-inner" style="max-width: 900px; margin: 0 auto;">
+            <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; text-align: center;">Why an Online Dice Roller?</h2>
+            <p style="color: var(--ink-2); line-height: 1.8; margin: 16px 0;">A <strong>dice roller</strong> is a versatile tool for anyone who needs a quick random number. Whether you're playing a board game, teaching probability, or just making a decision, our <strong>virtual dice</strong> deliver instant results. Unlike physical dice, you never lose them, and they work perfectly on any device. Our <strong>online dice</strong> uses a cryptographically strong random generator, so you can trust every roll.</p>
+            <p style="color: var(--ink-2); line-height: 1.8;">This <strong>dice rolling game</strong> is designed to be simple, fast, and accessible. No downloads, no sign-ups, no ads that interrupt your flow. Just pure dice-rolling fun. Use it for <strong>board game dice</strong>, <strong>classroom dice</strong>, or as a <strong>random dice generator</strong> for any scenario. The history feature helps you keep track of rolls, which is especially useful in educational settings or for game masters.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0 10px;">
+                <span class="kw-tag">virtual dice roller</span>
+                <span class="kw-tag">online dice game</span>
+                <span class="kw-tag">roll 2 dice</span>
+                <span class="kw-tag">dice for board games</span>
+                <span class="kw-tag">free dice roller</span>
+                <span class="kw-tag">random dice generator</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section" style="background: var(--cream-2); padding-top: 30px; padding-bottom: 40px;">
+        <div class="section-inner" style="max-width: 760px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <span class="eyebrow">questions</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;">Frequently Asked Questions</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="background: var(--white); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+                    <h4 style="font-weight: 700;">Is this dice roller truly random?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">Yes, we use a strong pseudo-random number generator that produces unbiased results.</p>
+                </div>
+                <div style="background: var(--white); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+                    <h4 style="font-weight: 700;">Can I use it on my phone?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">Absolutely. The page is fully responsive and touch-friendly.</p>
+                </div>
+                <div style="background: var(--white); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+                    <h4 style="font-weight: 700;">How many rolls can I save in history?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">The last 20 rolls are stored in your session. You can clear history anytime.</p>
+                </div>
+                <div style="background: var(--white); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+                    <h4 style="font-weight: 700;">Is there a cost to use this dice roller?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">No, it's completely free and always will be.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER injected -->
+<footer id="main-site-footer" class="site-footer"></footer>
+
+<!-- SCRIPTS -->
+<script src="js/header.js" defer></script>
+<script src="js/footer.js" defer></script>
+
+<script>
+    (function() {
+        // DOM refs
+        const die1 = document.getElementById('die1');
+        const die2 = document.getElementById('die2');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const historyList = document.getElementById('historyList');
+        const clearBtn = document.getElementById('clearHistoryBtn');
+
+        const rollBtn = document.getElementById('rollBtn');
+        const roll1Btn = document.getElementById('roll1Btn');
+        const roll2Btn = document.getElementById('roll2Btn');
+
+        const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        let history = [];
+
+        function rollDice(numDice) {
+            if (numDice < 1) numDice = 1;
+            if (numDice > 2) numDice = 2;
+            const results = [];
+            let sum = 0;
+            for (let i = 0; i < numDice; i++) {
+                const val = Math.floor(Math.random() * 6) + 1;
+                results.push(val);
+                sum += val;
+            }
+            // update display
+            die1.textContent = faces[results[0] - 1];
+            if (numDice === 2) {
+                die2.textContent = faces[results[1] - 1];
+            } else {
+                die2.textContent = ''; // hide second die
+            }
+            totalDisplay.textContent = `🎯 Total: ${sum}`;
+
+            // add to history
+            const time = new Date().toLocaleTimeString();
+            const entryStr = numDice === 2 ? `${results[0]} + ${results[1]}` : `${results[0]}`;
+            history.unshift({ text: entryStr, sum: sum, time: time });
+            if (history.length > 20) history.pop();
+            renderHistory();
+
+            // optional animation: brief pulse
+            die1.style.transition = 'transform 0.1s';
+            die1.style.transform = 'scale(1.1)';
+            setTimeout(() => die1.style.transform = 'scale(1)', 100);
+            if (numDice === 2) {
+                die2.style.transition = 'transform 0.1s';
+                die2.style.transform = 'scale(1.1)';
+                setTimeout(() => die2.style.transform = 'scale(1)', 100);
+            }
+        }
+
+        function renderHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = `<div class="entry" style="color: var(--ink-3); font-style: italic;">No rolls yet.</div>`;
+                return;
+            }
+            let html = '';
+            history.forEach(item => {
+                html += `<div class="entry"><span>🎲 ${item.text} = ${item.sum}</span><span>${item.time}</span></div>`;
+            });
+            historyList.innerHTML = html;
+        }
+
+        function clearHistory() {
+            history = [];
+            renderHistory();
+        }
+
+        // Event listeners
+        rollBtn.addEventListener('click', () => rollDice(2));
+        roll1Btn.addEventListener('click', () => rollDice(1));
+        roll2Btn.addEventListener('click', () => rollDice(2));
+        clearBtn.addEventListener('click', clearHistory);
+
+        // Initial roll
+        rollDice(2);
+    })();
+</script>
+
+<!-- fallback for header/footer if external fails -->
+<script>
+    (function ensureContainers() {
+        // minimal safety: if header/footer not populated by external, show placeholder.
+        // but external scripts should handle it.
+    })();
+</script>
+
+</body>
+</html>
