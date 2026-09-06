@@ -19,10 +19,10 @@ function renderHeader() {
             🎮 Games <span class="dropdown-arrow">▼</span>
           </button>
           <div class="dropdown-content" role="menu">
-            <a href="/dice-roller-game.html" role="menuitem">🎲 Dice Roller</a>
-            <a href="/memory-match-game.html" role="menuitem">🧠 Memory Match</a>
-            <a href="/number-guessing-game.html" role="menuitem">🔢 Number Guessing</a>
-            <a href="/rock-paper-scissors.html" role="menuitem">✊ Rock Paper Scissors</a>
+            <a href="/dice-roller-game" role="menuitem">🎲 Dice Roller</a>
+            <a href="/memory-match-game" role="menuitem">🧠 Memory Match</a>
+            <a href="/number-guessing-game" role="menuitem">🔢 Number Guessing</a>
+            <a href="/rock-paper-scissors" role="menuitem">✊ Rock Paper Scissors</a>
           </div>
         </div>
         
