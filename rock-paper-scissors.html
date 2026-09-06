@@ -1,1 +1,540 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Play a free browser game of rock paper scissors against the computer."><title>Rock Paper Scissors Game | SpinWheel Game</title><link rel="stylesheet" href="css/style.css"></head><body><header id="main-site-header" class="site-header"></header><main class="section"><div class="section-inner" style="text-align:center"><h1>Rock Paper Scissors</h1><p>Choose your move and see if you can beat the computer.</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:28px 0"><button class="btn-primary" onclick="play('Rock')">Rock</button><button class="btn-primary" onclick="play('Paper')">Paper</button><button class="btn-primary" onclick="play('Scissors')">Scissors</button></div><h2 id="result">Make your move!</h2><p id="score">You: 0 · Computer: 0</p></div></main><footer id="main-site-footer" class="site-footer"></footer><script>let you=0,computer=0;function play(move){const options=['Rock','Paper','Scissors'],cpu=options[Math.floor(Math.random()*3)];let text=move===cpu?'Tie!':((move==='Rock'&&cpu==='Scissors')||(move==='Paper'&&cpu==='Rock')||(move==='Scissors'&&cpu==='Paper'))?(you++,'You win!'):(computer++,'Computer wins!');document.getElementById('result').textContent=text+' You chose '+move+'; computer chose '+cpu+'.';document.getElementById('score').textContent='You: '+you+' · Computer: '+computer}</script><script src="js/header.js" defer></script><script src="js/footer.js" defer></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Play Rock Paper Scissors online against the computer. Free browser game with score tracking, win/loss stats, and mobile-friendly design.">
+    <meta name="keywords" content="rock paper scissors, rock paper scissors online, RPS game, play rock paper scissors, hand game, free browser game, classic game, vs computer, win loss tracker">
+    <meta name="author" content="SpinWheel Game">
+    <link rel="canonical" href="https://spinwheelgame.github.io/rock-paper-scissors">
+    <title>Rock Paper Scissors Game | Free Online Classic Hand Game</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rock Paper Scissors – Free Online Game">
+    <meta property="og:description" content="Play the classic hand game against the computer. Track your wins, losses, and ties in this fast-paced browser game.">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://spinwheelgame.github.io/rock-paper-scissors">
+
+    <!-- Schema Markup: WebApplication -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Rock Paper Scissors Game",
+            "url": "https://spinwheelgame.github.io/rock-paper-scissors",
+            "description": "A classic Rock Paper Scissors game where you play against the computer. Features score tracking, win/loss/tie counters, and a clean interface.",
+            "applicationCategory": "Game",
+            "operatingSystem": "All",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": "Rock, Paper, Scissors buttons, score tracking, win/loss/tie counters, computer AI, mobile-friendly"
+        }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
+    <style>
+        /* RPS refinements */
+        .rps-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .rps-choices {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0 20px;
+        }
+        .rps-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+            background: var(--white);
+            font-size: 2.8rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+        }
+        .rps-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            border-color: var(--accent-1);
+            box-shadow: 0 8px 24px rgba(255,107,107,0.2);
+        }
+        .rps-btn:active {
+            transform: scale(0.95);
+        }
+        .rps-btn .label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--ink-2);
+            margin-top: 2px;
+        }
+        .rps-btn .icon {
+            font-size: 2.4rem;
+            line-height: 1;
+        }
+        .result-box {
+            background: var(--cream-2);
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .result-box .main-result {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--ink);
+        }
+        .result-box .sub-result {
+            font-size: 0.95rem;
+            color: var(--ink-3);
+            margin-top: 4px;
+        }
+        .result-box .win-text { color: #28a745; }
+        .result-box .lose-text { color: #dc3545; }
+        .result-box .tie-text { color: #ffc107; }
+
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: var(--white);
+            border-radius: 60px;
+            padding: 12px 28px;
+            box-shadow: var(--shadow-sm);
+            margin: 12px auto;
+            max-width: 380px;
+        }
+        .scoreboard .score-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .scoreboard .score-item .num {
+            font-size: 1.3rem;
+            min-width: 28px;
+        }
+        .scoreboard .score-item.win .num { color: #28a745; }
+        .scoreboard .score-item.lose .num { color: #dc3545; }
+        .scoreboard .score-item.tie .num { color: #ffc107; }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .action-row .btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 2px solid #ddd;
+            background: var(--white);
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: var(--font-body);
+        }
+        .action-row .btn-primary {
+            background: var(--grad-main);
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(255,107,107,0.25);
+        }
+        .action-row .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,107,107,0.35);
+        }
+        .action-row .btn:hover:not(.btn-primary) {
+            border-color: var(--accent-1);
+            color: var(--accent-1);
+        }
+
+        .feature-grid-rps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+            gap: 20px;
+            margin: 30px 0 20px;
+        }
+        .feature-card-rps {
+            background: var(--white);
+            padding: 20px 14px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        .feature-card-rps .icon { font-size: 2rem; margin-bottom: 6px; }
+        .feature-card-rps h4 { font-weight: 700; margin-bottom: 4px; }
+        .feature-card-rps p { font-size: 0.9rem; color: var(--ink-3); }
+
+        .how-to-grid-rps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .how-step-rps {
+            background: var(--cream-2);
+            border-radius: 20px;
+            padding: 18px 12px;
+            text-align: center;
+        }
+        .how-step-rps .num {
+            background: var(--grad-main);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        .move-display {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink-2);
+        }
+        .move-display .move-icon {
+            font-size: 2.4rem;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .rps-btn { width: 80px; height: 80px; font-size: 2.2rem; }
+            .rps-btn .icon { font-size: 1.8rem; }
+            .result-box .main-result { font-size: 1.2rem; }
+            .scoreboard { gap: 16px; padding: 10px 16px; font-size: 0.85rem; }
+            .scoreboard .score-item .num { font-size: 1.1rem; }
+            .move-display { gap: 20px; font-size: 0.95rem; }
+        }
+        @media (max-width: 380px) {
+            .rps-btn { width: 70px; height: 70px; font-size: 1.8rem; }
+            .rps-btn .icon { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER injected -->
+<header id="main-site-header" class="site-header"></header>
+
+<main>
+    <!-- HERO / GAME SECTION -->
+    <section class="section" style="padding-top: 20px;">
+        <div class="section-inner rps-container">
+
+            <span class="eyebrow">✊ classic game</span>
+            <h1 style="font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; letter-spacing: -0.5px;">
+                Rock Paper Scissors – <span class="grad-text">Beat the Computer</span>
+            </h1>
+            <p style="font-size: 1rem; max-width: 450px; margin: 0 auto 10px; color: var(--ink-2);">
+                Choose your move and see if you can outsmart the computer. Classic hand game fun for everyone.
+            </p>
+
+            <!-- SCOREBOARD -->
+            <div class="scoreboard" id="scoreboard">
+                <div class="score-item win">🏆 <span class="num" id="winCount">0</span></div>
+                <div class="score-item lose">💀 <span class="num" id="loseCount">0</span></div>
+                <div class="score-item tie">🤝 <span class="num" id="tieCount">0</span></div>
+            </div>
+
+            <!-- MOVE DISPLAY (shows what was chosen) -->
+            <div class="move-display">
+                <div>
+                    <span class="move-icon" id="playerMoveIcon">🤚</span>
+                    <span id="playerMoveLabel">You</span>
+                </div>
+                <span style="font-size: 1.8rem;">⚡</span>
+                <div>
+                    <span class="move-icon" id="cpuMoveIcon">🤖</span>
+                    <span id="cpuMoveLabel">Computer</span>
+                </div>
+            </div>
+
+            <!-- CHOICE BUTTONS -->
+            <div class="rps-choices">
+                <button class="rps-btn" data-move="Rock">
+                    <span class="icon">✊</span>
+                    <span class="label">Rock</span>
+                </button>
+                <button class="rps-btn" data-move="Paper">
+                    <span class="icon">✋</span>
+                    <span class="label">Paper</span>
+                </button>
+                <button class="rps-btn" data-move="Scissors">
+                    <span class="icon">✌️</span>
+                    <span class="label">Scissors</span>
+                </button>
+            </div>
+
+            <!-- RESULT BOX -->
+            <div class="result-box" id="resultBox">
+                <div class="main-result" id="mainResult">Make your move!</div>
+                <div class="sub-result" id="subResult">Click a hand above to start playing.</div>
+            </div>
+
+            <!-- ACTION ROW -->
+            <div class="action-row">
+                <button class="btn btn-primary" id="resetBtn">🔄 Reset Scores</button>
+            </div>
+
+            <!-- WIN STREAK BANNER -->
+            <div id="streakBanner" style="display: none; background: linear-gradient(135deg, #fff3cd, #ffeaa7); padding: 8px 18px; border-radius: 60px; margin-top: 14px; font-weight: 800; color: #856404; font-size: 0.9rem;">
+                🔥 Win Streak!
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section" style="background: var(--cream-2); padding-top: 30px; padding-bottom: 30px;">
+        <div class="section-inner" style="max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span class="eyebrow">why play</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem,2.4vw,2rem);">Classic Fun with a Modern Twist</h2>
+            </div>
+            <div class="feature-grid-rps">
+                <div class="feature-card-rps"><div class="icon">🎯</div><h4>Play vs Computer</h4><p>Smart AI that makes random but fair choices every round.</p></div>
+                <div class="feature-card-rps"><div class="icon">📊</div><h4>Score Tracking</h4><p>Track your wins, losses, and ties at a glance.</p></div>
+                <div class="feature-card-rps"><div class="icon">📱</div><h4>Mobile Friendly</h4><p>Responsive design works perfectly on any device.</p></div>
+                <div class="feature-card-rps"><div class="icon">⚡</div><h4>Fast & Simple</h4><p>Instant feedback with clear results and visual moves.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="section" style="background: var(--white); padding-top: 30px; padding-bottom: 30px;">
+        <div class="section-inner" style="max-width: 700px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 18px;">
+                <span class="eyebrow">how to play</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.3rem,2.2vw,1.8rem);">Rock Beats Scissors, Paper Beats Rock...</h2>
+            </div>
+            <div class="how-to-grid-rps">
+                <div class="how-step-rps"><div class="num">1</div><h4>Choose</h4><p>Tap Rock, Paper, or Scissors.</p></div>
+                <div class="how-step-rps"><div class="num">2</div><h4>Compare</h4><p>Computer picks its move instantly.</p></div>
+                <div class="how-step-rps"><div class="num">3</div><h4>Result</h4><p>See who wins — you or the computer.</p></div>
+                <div class="how-step-rps"><div class="num">4</div><h4>Repeat</h4><p>Play as many rounds as you like!</p></div>
+            </div>
+            <p style="text-align: center; color: var(--ink-3); font-size: 0.95rem;">The classic hand game that never gets old. Perfect for quick breaks or settling disputes.</p>
+        </div>
+    </section>
+
+    <!-- USE CASES / SEO DENSE -->
+    <section class="section" style="background: var(--cream-2); padding-top: 30px; padding-bottom: 30px;">
+        <div class="section-inner" style="max-width: 800px; margin: 0 auto;">
+            <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; text-align: center;">Why Rock Paper Scissors Is a Timeless Classic</h2>
+            <p style="color: var(--ink-2); line-height: 1.8; margin: 12px 0;"><strong>Rock Paper Scissors</strong> is one of the world's most popular hand games. This <strong>online RPS game</strong> brings the classic experience to your browser with a clean interface and instant feedback. Whether you're killing time, making a decision, or just having fun, this <strong>free hand game</strong> delivers. The computer opponent makes random choices, ensuring every round is fair and unpredictable.</p>
+            <p style="color: var(--ink-2); line-height: 1.8;">This <strong>browser game</strong> tracks your wins, losses, and ties so you can see your performance over time. It's perfect for kids learning the rules, adults looking for a quick mental break, or anyone who enjoys simple, satisfying games. The <strong>Rock Paper Scissors online</strong> experience is fast, fun, and completely free — no downloads or sign-ups required.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 4px;">
+                <span class="kw-tag">rock paper scissors</span>
+                <span class="kw-tag">RPS game</span>
+                <span class="kw-tag">play rock paper scissors</span>
+                <span class="kw-tag">classic hand game</span>
+                <span class="kw-tag">free browser game</span>
+                <span class="kw-tag">vs computer</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section" style="background: var(--white); padding-top: 30px; padding-bottom: 40px;">
+        <div class="section-inner" style="max-width: 700px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span class="eyebrow">questions</span>
+                <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 1.4rem;">Frequently Asked Questions</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="background: var(--cream-2); border-radius: 16px; padding: 14px 18px;">
+                    <h4 style="font-weight: 700;">Is this Rock Paper Scissors game free?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">Yes, completely free with no sign-up or ads during gameplay.</p>
+                </div>
+                <div style="background: var(--cream-2); border-radius: 16px; padding: 14px 18px;">
+                    <h4 style="font-weight: 700;">Can I play on my phone?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">Absolutely. The game is fully responsive and touch-friendly.</p>
+                </div>
+                <div style="background: var(--cream-2); border-radius: 16px; padding: 14px 18px;">
+                    <h4 style="font-weight: 700;">How does the computer choose?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">The computer makes a random choice each round — completely fair.</p>
+                </div>
+                <div style="background: var(--cream-2); border-radius: 16px; padding: 14px 18px;">
+                    <h4 style="font-weight: 700;">Can I reset the score?</h4>
+                    <p style="color: var(--ink-3); margin-top: 4px;">Yes, click the "Reset Scores" button to clear all stats and start fresh.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER injected -->
+<footer id="main-site-footer" class="site-footer"></footer>
+
+<!-- SCRIPTS -->
+<script src="js/header.js" defer></script>
+<script src="js/footer.js" defer></script>
+
+<script>
+    (function() {
+        // ----- Rock Paper Scissors Logic -----
+        const moves = ['Rock', 'Paper', 'Scissors'];
+        const emojis = { 'Rock': '✊', 'Paper': '✋', 'Scissors': '✌️' };
+
+        let wins = 0, losses = 0, ties = 0;
+        let winStreak = 0;
+        let lastResult = null;
+
+        const winDisplay = document.getElementById('winCount');
+        const loseDisplay = document.getElementById('loseCount');
+        const tieDisplay = document.getElementById('tieCount');
+        const mainResult = document.getElementById('mainResult');
+        const subResult = document.getElementById('subResult');
+        const resultBox = document.getElementById('resultBox');
+        const playerMoveIcon = document.getElementById('playerMoveIcon');
+        const cpuMoveIcon = document.getElementById('cpuMoveIcon');
+        const playerMoveLabel = document.getElementById('playerMoveLabel');
+        const cpuMoveLabel = document.getElementById('cpuMoveLabel');
+        const streakBanner = document.getElementById('streakBanner');
+
+        function updateScores() {
+            winDisplay.textContent = wins;
+            loseDisplay.textContent = losses;
+            tieDisplay.textContent = ties;
+        }
+
+        function updateStreak() {
+            if (winStreak >= 2) {
+                streakBanner.style.display = 'block';
+                streakBanner.textContent = `🔥 ${winStreak} Win Streak!`;
+            } else {
+                streakBanner.style.display = 'none';
+            }
+        }
+
+        function play(playerMove) {
+            const cpuMove = moves[Math.floor(Math.random() * moves.length)];
+
+            // Update move icons
+            playerMoveIcon.textContent = emojis[playerMove];
+            cpuMoveIcon.textContent = emojis[cpuMove];
+            playerMoveLabel.textContent = `You: ${playerMove}`;
+            cpuMoveLabel.textContent = `CPU: ${cpuMove}`;
+
+            let resultText, resultClass;
+            let isWin = false, isLoss = false, isTie = false;
+
+            if (playerMove === cpuMove) {
+                resultText = "It's a tie! 🤝";
+                resultClass = 'tie-text';
+                ties++;
+                isTie = true;
+                winStreak = 0;
+            } else if (
+                (playerMove === 'Rock' && cpuMove === 'Scissors') ||
+                (playerMove === 'Paper' && cpuMove === 'Rock') ||
+                (playerMove === 'Scissors' && cpuMove === 'Paper')
+            ) {
+                resultText = "You win! 🎉";
+                resultClass = 'win-text';
+                wins++;
+                isWin = true;
+                winStreak++;
+            } else {
+                resultText = "Computer wins! 💻";
+                resultClass = 'lose-text';
+                losses++;
+                isLoss = true;
+                winStreak = 0;
+            }
+
+            // Update result box
+            mainResult.textContent = resultText;
+            mainResult.className = 'main-result ' + resultClass;
+            subResult.textContent = `You chose ${playerMove} · Computer chose ${cpuMove}`;
+
+            updateScores();
+            updateStreak();
+
+            // Auto-hide streak after a loss or tie
+            if (!isWin) {
+                setTimeout(() => { streakBanner.style.display = 'none'; }, 2000);
+            }
+        }
+
+        function resetScores() {
+            wins = 0;
+            losses = 0;
+            ties = 0;
+            winStreak = 0;
+            updateScores();
+            updateStreak();
+            mainResult.textContent = 'Scores reset!';
+            mainResult.className = 'main-result';
+            subResult.textContent = 'Make your move.';
+            playerMoveIcon.textContent = '🤚';
+            cpuMoveIcon.textContent = '🤖';
+            playerMoveLabel.textContent = 'You';
+            cpuMoveLabel.textContent = 'Computer';
+            streakBanner.style.display = 'none';
+        }
+
+        // ----- Event Listeners -----
+        document.querySelectorAll('.rps-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const move = this.dataset.move;
+                play(move);
+            });
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', resetScores);
+
+        // Init
+        updateScores();
+        updateStreak();
+
+        // Add keyboard shortcuts (1,2,3 for Rock, Paper, Scissors)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1') play('Rock');
+            else if (e.key === '2') play('Paper');
+            else if (e.key === '3') play('Scissors');
+        });
+    })();
+</script>
+
+<!-- fallback safety -->
+<script>
+    (function ensureContainers() {
+        // external header/footer scripts should populate
+    })();
+</script>
+
+</body>
+</html>
