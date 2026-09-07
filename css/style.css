@@ -1330,3 +1330,102 @@ body.menu-open {
   box-shadow: 0 4px 16px rgba(255,107,107,0.25);
   margin-bottom: 14px;
 }
+/* ===== VIDEO OVERLAYS ===== */
+#video-overlay,
+#win-video-overlay {
+    display: none !important;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.75);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+#video-overlay.show,
+#win-video-overlay.show {
+    display: flex !important;
+    opacity: 1;
+}
+
+#video-overlay video,
+#win-video-overlay video {
+    width: 100%;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    background: #000;
+}
+
+/* Video overlay close button (optional) */
+.video-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.video-close-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Video loading placeholder */
+.video-placeholder {
+    color: #fff;
+    text-align: center;
+    padding: 40px;
+    font-size: 2rem;
+    font-family: var(--font-display);
+}
+
+/* Responsive video overlays */
+@media (max-width: 768px) {
+    #video-overlay video,
+    #win-video-overlay video {
+        max-width: 95%;
+        max-height: 70vh;
+        border-radius: 12px;
+    }
+    
+    .video-close-btn {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Video toggle in settings */
+#video-toggle {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-1);
+    cursor: pointer;
+}
+
+/* Animation for video overlay fade */
+@keyframes videoFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#video-overlay.show video,
+#win-video-overlay.show video {
+    animation: videoFadeIn 0.4s cubic-bezier(.175,.885,.32,1.275);
+}
