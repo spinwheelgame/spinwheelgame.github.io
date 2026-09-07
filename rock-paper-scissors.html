@@ -70,20 +70,14 @@
             border-radius: 50%;
             border: 3px solid #ddd;
             background: var(--white);
+            font-size: 2.8rem;
             cursor: pointer;
             transition: all 0.25s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             font-weight: 400;
-            gap: 2px;
-        }
-        .rps-btn svg {
-            width: 36px;
-            height: 36px;
-            display: block;
         }
         .rps-btn:hover {
             transform: translateY(-4px) scale(1.04);
@@ -99,6 +93,10 @@
             font-weight: 700;
             color: var(--ink-2);
             margin-top: 2px;
+        }
+        .rps-btn .icon {
+            font-size: 2.4rem;
+            line-height: 1;
         }
         .result-box {
             background: var(--cream-2);
@@ -143,11 +141,6 @@
             font-weight: 700;
             font-size: 1rem;
         }
-        .scoreboard .score-item svg {
-            width: 24px;
-            height: 24px;
-            display: block;
-        }
         .scoreboard .score-item .num {
             font-size: 1.3rem;
             min-width: 28px;
@@ -173,14 +166,6 @@
             cursor: pointer;
             transition: 0.2s;
             font-family: var(--font-body);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .action-row .btn svg {
-            width: 20px;
-            height: 20px;
-            display: block;
         }
         .action-row .btn-primary {
             background: var(--grad-main);
@@ -210,17 +195,7 @@
             box-shadow: var(--shadow-sm);
             text-align: center;
         }
-        .feature-card-rps .icon { 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-        .feature-card-rps .icon svg {
-            width: 36px;
-            height: 36px;
-            display: block;
-        }
+        .feature-card-rps .icon { font-size: 2rem; margin-bottom: 6px; }
         .feature-card-rps h4 { font-weight: 700; margin-bottom: 4px; }
         .feature-card-rps p { font-size: 0.9rem; color: var(--ink-3); }
 
@@ -261,81 +236,22 @@
             color: var(--ink-2);
         }
         .move-display .move-icon {
-            display: block;
-        }
-        .move-display .move-icon svg {
-            width: 48px;
-            height: 48px;
-            display: block;
-            margin: 0 auto 4px;
-        }
-
-        .kw-tag {
-            background: var(--cream-2);
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--ink-2);
-            font-weight: 600;
-        }
-
-        .rps-btn .icon-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .rps-btn .icon-wrap svg {
-            width: 36px;
-            height: 36px;
+            font-size: 2.4rem;
             display: block;
         }
 
         @media (max-width: 480px) {
-            .rps-btn { width: 80px; height: 80px; }
-            .rps-btn .icon-wrap svg { width: 28px; height: 28px; }
+            .rps-btn { width: 80px; height: 80px; font-size: 2.2rem; }
+            .rps-btn .icon { font-size: 1.8rem; }
             .result-box .main-result { font-size: 1.2rem; }
             .scoreboard { gap: 16px; padding: 10px 16px; font-size: 0.85rem; }
             .scoreboard .score-item .num { font-size: 1.1rem; }
             .move-display { gap: 20px; font-size: 0.95rem; }
-            .move-display .move-icon svg { width: 36px; height: 36px; }
         }
         @media (max-width: 380px) {
-            .rps-btn { width: 70px; height: 70px; }
-            .rps-btn .icon-wrap svg { width: 24px; height: 24px; }
+            .rps-btn { width: 70px; height: 70px; font-size: 1.8rem; }
+            .rps-btn .icon { font-size: 1.5rem; }
         }
-
-        .eyebrow {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent-1);
-            background: rgba(255,107,107,0.1);
-            padding: 4px 14px;
-            border-radius: 50px;
-        }
-        .grad-text {
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        :root {
-            --cream-2: #f8f5f0;
-            --white: #ffffff;
-            --ink: #1a1a2e;
-            --ink-2: #4a4a5a;
-            --ink-3: #7a7a8a;
-            --accent-1: #ff6b6b;
-            --grad-main: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
-            --font-display: system-ui, -apple-system, sans-serif;
-            --font-body: system-ui, -apple-system, sans-serif;
-        }
-        .section { padding: 20px 16px; }
-        .section-inner { max-width: 1200px; margin: 0 auto; }
-        .site-header, .site-footer { display: none; }
     </style>
 </head>
 <body>
@@ -358,53 +274,20 @@
 
             <!-- SCOREBOARD -->
             <div class="scoreboard" id="scoreboard">
-                <div class="score-item win">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                    </svg>
-                    <span class="num" id="winCount">0</span>
-                </div>
-                <div class="score-item lose">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="8" x2="12" y2="12"/>
-                        <line x1="12" y1="16" x2="12.01" y2="16"/>
-                    </svg>
-                    <span class="num" id="loseCount">0</span>
-                </div>
-                <div class="score-item tie">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                    <span class="num" id="tieCount">0</span>
-                </div>
+                <div class="score-item win">🏆 <span class="num" id="winCount">0</span></div>
+                <div class="score-item lose">💀 <span class="num" id="loseCount">0</span></div>
+                <div class="score-item tie">🤝 <span class="num" id="tieCount">0</span></div>
             </div>
 
             <!-- MOVE DISPLAY (shows what was chosen) -->
             <div class="move-display">
                 <div>
-                    <span class="move-icon" id="playerMoveIcon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 11L10 7M18 13L14 17M10 7L6 3M14 17L18 21"/>
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>
-                        </svg>
-                    </span>
+                    <span class="move-icon" id="playerMoveIcon">🤚</span>
                     <span id="playerMoveLabel">You</span>
                 </div>
                 <span style="font-size: 1.8rem;">⚡</span>
                 <div>
-                    <span class="move-icon" id="cpuMoveIcon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <rect x="6" y="8" width="12" height="8" rx="1"/>
-                            <circle cx="8" cy="12" r="1" fill="currentColor"/>
-                            <circle cx="16" cy="12" r="1" fill="currentColor"/>
-                            <line x1="6" y1="18" x2="6" y2="20"/>
-                            <line x1="18" y1="18" x2="18" y2="20"/>
-                        </svg>
-                    </span>
+                    <span class="move-icon" id="cpuMoveIcon">🤖</span>
                     <span id="cpuMoveLabel">Computer</span>
                 </div>
             </div>
@@ -412,38 +295,15 @@
             <!-- CHOICE BUTTONS -->
             <div class="rps-choices">
                 <button class="rps-btn" data-move="Rock">
-                    <span class="icon-wrap">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2C10.5 4 8 5 6 7c-2 2-3 5-2 8s3 6 6 6c3 0 5-2 6-4s2-5 0-8c-1-1.5-3-2.5-4-4z"/>
-                            <path d="M12 2v3M12 19v3M9 5l-2-2M15 5l2-2M6 9l-3 1M18 9l3 1"/>
-                            <circle cx="12" cy="12" r="2"/>
-                        </svg>
-                    </span>
+                    <span class="icon">✊</span>
                     <span class="label">Rock</span>
                 </button>
                 <button class="rps-btn" data-move="Paper">
-                    <span class="icon-wrap">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="8" y1="13" x2="16" y2="13"/>
-                            <line x1="8" y1="17" x2="16" y2="17"/>
-                            <line x1="8" y1="9" x2="10" y2="9"/>
-                        </svg>
-                    </span>
+                    <span class="icon">✋</span>
                     <span class="label">Paper</span>
                 </button>
                 <button class="rps-btn" data-move="Scissors">
-                    <span class="icon-wrap">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="6" cy="6" r="3"/>
-                            <circle cx="6" cy="18" r="3"/>
-                            <line x1="8" y1="8" x2="16" y2="16"/>
-                            <line x1="8" y1="16" x2="16" y2="8"/>
-                            <circle cx="18" cy="6" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                        </svg>
-                    </span>
+                    <span class="icon">✌️</span>
                     <span class="label">Scissors</span>
                 </button>
             </div>
@@ -456,13 +316,7 @@
 
             <!-- ACTION ROW -->
             <div class="action-row">
-                <button class="btn btn-primary" id="resetBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="1 4 1 10 7 10"/>
-                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
-                    </svg>
-                    Reset Scores
-                </button>
+                <button class="btn btn-primary" id="resetBtn">🔄 Reset Scores</button>
             </div>
 
             <!-- WIN STREAK BANNER -->
@@ -480,56 +334,10 @@
                 <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem,2.4vw,2rem);">Classic Fun with a Modern Twist</h2>
             </div>
             <div class="feature-grid-rps">
-                <div class="feature-card-rps">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 8v4l2 2"/>
-                            <path d="M8 8c-.6.8-1 1.8-1 3 0 3 2.5 5 5 5s5-2 5-5c0-1.2-.4-2.2-1-3"/>
-                        </svg>
-                    </div>
-                    <h4>Play vs Computer</h4>
-                    <p>Smart AI that makes random but fair choices every round.</p>
-                </div>
-                <div class="feature-card-rps">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
-                            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
-                            <line x1="18" y1="12" x2="18" y2="17"/>
-                            <line x1="14" y1="12" x2="14" y2="17"/>
-                            <line x1="10" y1="12" x2="10" y2="17"/>
-                            <line x1="6" y1="12" x2="6" y2="17"/>
-                        </svg>
-                    </div>
-                    <h4>Score Tracking</h4>
-                    <p>Track your wins, losses, and ties at a glance.</p>
-                </div>
-                <div class="feature-card-rps">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="3"/>
-                            <path d="M8 2v3M16 2v3M2 9h20"/>
-                            <circle cx="7" cy="14" r="1.5" fill="currentColor"/>
-                            <circle cx="12" cy="14" r="1.5" fill="currentColor"/>
-                            <circle cx="17" cy="14" r="1.5" fill="currentColor"/>
-                            <circle cx="7" cy="18" r="1.5" fill="currentColor"/>
-                            <circle cx="12" cy="18" r="1.5" fill="currentColor"/>
-                            <circle cx="17" cy="18" r="1.5" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h4>Mobile Friendly</h4>
-                    <p>Responsive design works perfectly on any device.</p>
-                </div>
-                <div class="feature-card-rps">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                        </svg>
-                    </div>
-                    <h4>Fast & Simple</h4>
-                    <p>Instant feedback with clear results and visual moves.</p>
-                </div>
+                <div class="feature-card-rps"><div class="icon">🎯</div><h4>Play vs Computer</h4><p>Smart AI that makes random but fair choices every round.</p></div>
+                <div class="feature-card-rps"><div class="icon">📊</div><h4>Score Tracking</h4><p>Track your wins, losses, and ties at a glance.</p></div>
+                <div class="feature-card-rps"><div class="icon">📱</div><h4>Mobile Friendly</h4><p>Responsive design works perfectly on any device.</p></div>
+                <div class="feature-card-rps"><div class="icon">⚡</div><h4>Fast & Simple</h4><p>Instant feedback with clear results and visual moves.</p></div>
             </div>
         </div>
     </section>
@@ -608,7 +416,69 @@
     (function() {
         // ----- Rock Paper Scissors Logic -----
         const moves = ['Rock', 'Paper', 'Scissors'];
-        const emojis = { 'Rock': '✊', 'Paper': '✋', 'Scissors': '✌️' };
+        
+        // SVG icons for moves (colorful and stylish)
+        const moveSvgs = {
+            'Rock': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;display:block;">
+                <path d="M12 2C10.5 4 8 5 6 7c-2 2-3 5-2 8s3 6 6 6c3 0 5-2 6-4s2-5 0-8c-1-1.5-3-2.5-4-4z" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2v3M12 19v3M9 5l-2-2M15 5l2-2M6 9l-3 1M18 9l3 1" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="2" fill="#6c5ce7" stroke="none"/>
+                <path d="M12 10v4M10 12h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>`,
+            'Paper': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;display:block;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="14 2 14 8 20 8" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="8" y1="13" x2="16" y2="13" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                <line x1="8" y1="17" x2="16" y2="17" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                <line x1="8" y1="9" x2="10" y2="9" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="16" cy="13" r="1.5" fill="#00b894" stroke="none"/>
+            </svg>`,
+            'Scissors': `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;display:block;">
+                <circle cx="6" cy="6" r="3" stroke="#e17055" stroke-width="2"/>
+                <circle cx="6" cy="18" r="3" stroke="#e17055" stroke-width="2"/>
+                <line x1="8.5" y1="8.5" x2="15.5" y2="15.5" stroke="#e17055" stroke-width="2" stroke-linecap="round"/>
+                <line x1="8.5" y1="15.5" x2="15.5" y2="8.5" stroke="#e17055" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="18" cy="6" r="3" stroke="#e17055" stroke-width="2"/>
+                <circle cx="18" cy="18" r="3" stroke="#e17055" stroke-width="2"/>
+                <circle cx="6" cy="6" r="1.5" fill="#e17055" stroke="none"/>
+                <circle cx="6" cy="18" r="1.5" fill="#e17055" stroke="none"/>
+                <circle cx="18" cy="6" r="1.5" fill="#e17055" stroke="none"/>
+                <circle cx="18" cy="18" r="1.5" fill="#e17055" stroke="none"/>
+            </svg>`
+        };
+
+        // Default placeholder icons
+        const defaultPlayerIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;display:block;">
+            <circle cx="12" cy="12" r="9" stroke="#b2bec3" stroke-width="2"/>
+            <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="#b2bec3" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="2" fill="#b2bec3" stroke="none"/>
+        </svg>`;
+
+        const defaultCpuIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;display:block;">
+            <rect x="2" y="4" width="20" height="16" rx="2" stroke="#636e72" stroke-width="2"/>
+            <rect x="6" y="8" width="12" height="8" rx="1" stroke="#636e72" stroke-width="1.5"/>
+            <circle cx="8" cy="12" r="1" fill="#636e72"/>
+            <circle cx="16" cy="12" r="1" fill="#636e72"/>
+            <line x1="6" y1="18" x2="6" y2="20" stroke="#636e72" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18" y1="18" x2="18" y2="20" stroke="#636e72" stroke-width="2" stroke-linecap="round"/>
+        </svg>`;
+
+        // Result emojis replaced with SVG
+        const resultSvgs = {
+            win: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;display:inline-block;vertical-align:middle;margin-right:4px;">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="22 4 12 14.01 9 11.01" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`,
+            lose: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;display:inline-block;vertical-align:middle;margin-right:4px;">
+                <circle cx="12" cy="12" r="10" stroke="#d63031" stroke-width="2"/>
+                <line x1="12" y1="8" x2="12" y2="12" stroke="#d63031" stroke-width="2" stroke-linecap="round"/>
+                <line x1="12" y1="16" x2="12.01" y2="16" stroke="#d63031" stroke-width="2" stroke-linecap="round"/>
+            </svg>`,
+            tie: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;display:inline-block;vertical-align:middle;margin-right:4px;">
+                <circle cx="12" cy="12" r="10" stroke="#fdcb6e" stroke-width="2"/>
+                <line x1="8" y1="12" x2="16" y2="12" stroke="#fdcb6e" stroke-width="2" stroke-linecap="round"/>
+            </svg>`
+        };
 
         let wins = 0, losses = 0, ties = 0;
         let winStreak = 0;
@@ -626,16 +496,6 @@
         const cpuMoveLabel = document.getElementById('cpuMoveLabel');
         const streakBanner = document.getElementById('streakBanner');
 
-        // SVG icons for moves
-        const moveSvgs = {
-            'Rock': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C10.5 4 8 5 6 7c-2 2-3 5-2 8s3 6 6 6c3 0 5-2 6-4s2-5 0-8c-1-1.5-3-2.5-4-4z"/><path d="M12 2v3M12 19v3M9 5l-2-2M15 5l2-2M6 9l-3 1M18 9l3 1"/><circle cx="12" cy="12" r="2"/></svg>`,
-            'Paper': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>`,
-            'Scissors': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="8" y1="16" x2="16" y2="8"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/></svg>`
-        };
-
-        const defaultPlayerIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11L10 7M18 13L14 17M10 7L6 3M14 17L18 21"/><circle cx="12" cy="12" r="9"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>`;
-        const defaultCpuIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><rect x="6" y="8" width="12" height="8" rx="1"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/><line x1="6" y1="18" x2="6" y2="20"/><line x1="18" y1="18" x2="18" y2="20"/></svg>`;
-
         function updateScores() {
             winDisplay.textContent = wins;
             loseDisplay.textContent = losses;
@@ -645,7 +505,7 @@
         function updateStreak() {
             if (winStreak >= 2) {
                 streakBanner.style.display = 'block';
-                streakBanner.textContent = `🔥 ${winStreak} Win Streak!`;
+                streakBanner.innerHTML = `🔥 ${winStreak} Win Streak!`;
             } else {
                 streakBanner.style.display = 'none';
             }
@@ -654,7 +514,7 @@
         function play(playerMove) {
             const cpuMove = moves[Math.floor(Math.random() * moves.length)];
 
-            // Update move icons
+            // Update move icons with SVGs
             playerMoveIcon.innerHTML = moveSvgs[playerMove] || defaultPlayerIcon;
             cpuMoveIcon.innerHTML = moveSvgs[cpuMove] || defaultCpuIcon;
             playerMoveLabel.textContent = `You: ${playerMove}`;
@@ -664,7 +524,7 @@
             let isWin = false, isLoss = false, isTie = false;
 
             if (playerMove === cpuMove) {
-                resultText = "It's a tie! 🤝";
+                resultText = `${resultSvgs.tie} It's a tie!`;
                 resultClass = 'tie-text';
                 ties++;
                 isTie = true;
@@ -674,13 +534,13 @@
                 (playerMove === 'Paper' && cpuMove === 'Rock') ||
                 (playerMove === 'Scissors' && cpuMove === 'Paper')
             ) {
-                resultText = "You win! 🎉";
+                resultText = `${resultSvgs.win} You win!`;
                 resultClass = 'win-text';
                 wins++;
                 isWin = true;
                 winStreak++;
             } else {
-                resultText = "Computer wins! 💻";
+                resultText = `${resultSvgs.lose} Computer wins!`;
                 resultClass = 'lose-text';
                 losses++;
                 isLoss = true;
@@ -688,7 +548,7 @@
             }
 
             // Update result box
-            mainResult.textContent = resultText;
+            mainResult.innerHTML = resultText;
             mainResult.className = 'main-result ' + resultClass;
             subResult.textContent = `You chose ${playerMove} · Computer chose ${cpuMove}`;
 
@@ -708,7 +568,7 @@
             winStreak = 0;
             updateScores();
             updateStreak();
-            mainResult.textContent = 'Scores reset!';
+            mainResult.innerHTML = 'Scores reset!';
             mainResult.className = 'main-result';
             subResult.textContent = 'Make your move.';
             playerMoveIcon.innerHTML = defaultPlayerIcon;
@@ -740,7 +600,6 @@
         });
     })();
 </script>
-
 <!-- fallback safety -->
 <script>
     (function ensureContainers() {
