@@ -460,13 +460,20 @@
     <footer id="main-site-footer" class="site-footer"></footer>
 
         <!-- Result Modal with Winner Video -->
+        <!-- Result Modal with Winner Video -->
     <div id="result-modal">
         <div class="modal-box">
             <!-- Winner Video Container -->
-            <div id="result-modal">
-        <div class="modal-box">
-            <!-- Video container will be dynamically created by JS -->
-            <!-- The modal-label comes after video container -->
+            <div id="winner-video-container" style="display:none;margin-bottom:16px;border-radius:16px;overflow:hidden;position:relative;">
+                <video id="winner-video" style="width:100%;max-height:200px;border-radius:16px;object-fit:cover;" muted playsinline loop>
+                    <source src="videos/winner-animation.mp4" type="video/mp4">
+                    <!-- Fallback: animated emoji if video fails -->
+                    <div style="padding:20px;font-size:3rem;text-align:center;">🎉✨</div>
+                </video>
+                <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.7rem;background:rgba(0,0,0,0.4);padding:2px 12px;border-radius:10px;font-family:'Nunito',sans-serif;">🎬 Winner!</div>
+            </div>
+            
+            <div class="modal-emoji" style="display:none;">🎉✨🎡</div>
             <div class="modal-label">🎯 The wheel chose:</div>
             <div id="result-badge" style="background:#FF6B6B; padding: 10px 32px; border-radius: 60px; font-size: 1.8rem; font-weight: 800; font-family:'Poppins',sans-serif;">Winner</div>
             <p id="result-text" style="font-size: 1.1rem; margin: 12px 0 20px; font-weight: 600;">Option</p>
