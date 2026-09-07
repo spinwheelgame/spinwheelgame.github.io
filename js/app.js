@@ -22,6 +22,7 @@ const WheelApp = (() => {
     pendingResult: null,
     removeWinner: false,
     darkMode: true,
+    videoLoaded: false,
   };
 
   const PALETTES = {
@@ -47,14 +48,95 @@ const WheelApp = (() => {
 
   let canvas, ctx, animReq;
   let currentPalette = 'classic';
+  let winnerVideoElement = null;
+  let winnerVideoContainer = null;
+
+  /* ---- LAZY LOAD WINNER VIDEO ---- */
+  function lazyLoadWinnerVideo() {
+    return new Promise((resolve) => {
+      // If already loaded, resolve immediately
+      if (state.videoLoaded && winnerVideoElement) {
+        resolve(winnerVideoElement);
+        return;
+      }
+
+      // Get or create video container
+      winnerVideoContainer = document.getElementById('winner-video-container');
+      if (!winnerVideoContainer) {
+        // Create container if it doesn't exist
+        winnerVideoContainer = document.createElement('div');
+        winnerVideoContainer.id = 'winner-video-container';
+        winnerVideoContainer.style.cssText = 'display:none;margin-bottom:16px;border-radius:16px;overflow:hidden;position:relative;';
+        
+        // Insert before modal-label in modal-box
+        const modalBox = document.querySelector('.modal-box');
+        const modalLabel = modalBox.querySelector('.modal-label');
+        modalBox.insertBefore(winnerVideoContainer, modalLabel);
+      }
+
+      // Create video element if it doesn't exist
+      if (!winnerVideoElement) {
+        winnerVideoElement = document.createElement('video');
+        winnerVideoElement.id = 'winner-video';
+        winnerVideoElement.muted = true;
+        winnerVideoElement.playsInline = true;
+        winnerVideoElement.loop = false;
+        winnerVideoElement.style.cssText = 'width:100%;max-height:200px;border-radius:16px;object-fit:cover;display:block;';
+        
+        // Add source
+        const source = document.createElement('source');
+        source.src = 'videos/winner-animation.mp4';
+        source.type = 'video/mp4';
+        winnerVideoElement.appendChild(source);
+        
+        // Add fallback
+        const fallback = document.createElement('div');
+        fallback.style.cssText = 'padding:20px;font-size:3rem;text-align:center;background:rgba(0,0,0,0.2);';
+        fallback.textContent = '🎉✨';
+        winnerVideoElement.appendChild(fallback);
+        
+        // Add label overlay
+        const label = document.createElement('div');
+        label.style.cssText = 'position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.7rem;background:rgba(0,0,0,0.4);padding:2px 12px;border-radius:10px;font-family:"Nunito",sans-serif;';
+        label.textContent = '🎬 Winner!';
+        winnerVideoContainer.appendChild(winnerVideoElement);
+        winnerVideoContainer.appendChild(label);
+      }
+
+      // Load video
+      winnerVideoElement.load();
+      
+      // Wait for video to be ready
+      const onCanPlay = () => {
+        state.videoLoaded = true;
+        winnerVideoElement.removeEventListener('canplay', onCanPlay);
+        resolve(winnerVideoElement);
+      };
+      
+      // If video is already loaded enough
+      if (winnerVideoElement.readyState >= 3) {
+        state.videoLoaded = true;
+        resolve(winnerVideoElement);
+        return;
+      }
+      
+      winnerVideoElement.addEventListener('canplay', onCanPlay);
+      
+      // Fallback timeout - resolve anyway after 2 seconds
+      setTimeout(() => {
+        if (!state.videoLoaded) {
+          state.videoLoaded = true;
+          resolve(winnerVideoElement);
+        }
+      }, 2000);
+    });
+  }
 
   /* ---- WINNER VIDEO POPUP ---- */
-  function showWinnerVideoPopup(label, color) {
+  async function showWinnerVideoPopup(label, color) {
     const modal = document.getElementById('result-modal');
     const badge = document.getElementById('result-badge');
     const text = document.getElementById('result-text');
-    const video = document.getElementById('winner-video');
-    const videoContainer = document.getElementById('winner-video-container');
     
     // Update text and color
     badge.style.background = color;
@@ -64,18 +146,23 @@ const WheelApp = (() => {
     // Show modal
     modal.classList.add('show');
     
-    // Play video
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-      
-      // Hide video container after video ends
-      video.onended = () => {
-        videoContainer.style.display = 'none';
-      };
-      
-      // Show video container
-      videoContainer.style.display = 'block';
+    // Lazy load and play video
+    try {
+      const video = await lazyLoadWinnerVideo();
+      if (video && winnerVideoContainer) {
+        winnerVideoContainer.style.display = 'block';
+        video.currentTime = 0;
+        await video.play().catch(() => {});
+        
+        // Hide video container after video ends
+        video.onended = () => {
+          if (winnerVideoContainer) {
+            // Keep visible but stop playing
+          }
+        };
+      }
+    } catch (e) {
+      console.log('Video loading failed, showing fallback');
     }
     
     // Confetti burst
@@ -298,18 +385,6 @@ const WheelApp = (() => {
     document.getElementById('spin-btn').textContent = '🎯 SPIN!';
   }
 
-  /* ---- RESULT MODAL ---- */
-  function showResultModal(label, color) {
-    const modal = document.getElementById('result-modal');
-    const badge = document.getElementById('result-badge');
-    const text = document.getElementById('result-text');
-    badge.style.background = color;
-    badge.style.color = isDark(color) ? '#fff' : '#222';
-    text.textContent = label;
-    modal.classList.add('show');
-    confettiBurst();
-  }
-
   /* ---- CONFETTI ---- */
   function confettiBurst() {
     const container = document.getElementById('confetti-container');
@@ -469,7 +544,6 @@ const WheelApp = (() => {
     state.darkMode = !state.darkMode;
     const appSection = document.querySelector('.app-section');
     const wheelPanel = document.querySelector('.wheel-panel');
-    const itemsList = document.querySelector('.items-list');
     
     if (state.darkMode) {
       appSection.classList.add('dark-mode');
@@ -574,10 +648,12 @@ const WheelApp = (() => {
     // Result modal close
     document.getElementById('modal-close').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
-      const videoContainer = document.getElementById('winner-video-container');
-      const video = document.getElementById('winner-video');
-      if (video) video.pause();
-      if (videoContainer) videoContainer.style.display = 'none';
+      if (winnerVideoContainer) {
+        winnerVideoContainer.style.display = 'none';
+      }
+      if (winnerVideoElement) {
+        winnerVideoElement.pause();
+      }
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
@@ -587,10 +663,12 @@ const WheelApp = (() => {
     });
     document.getElementById('spin-again-btn').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
-      const videoContainer = document.getElementById('winner-video-container');
-      const video = document.getElementById('winner-video');
-      if (video) video.pause();
-      if (videoContainer) videoContainer.style.display = 'none';
+      if (winnerVideoContainer) {
+        winnerVideoContainer.style.display = 'none';
+      }
+      if (winnerVideoElement) {
+        winnerVideoElement.pause();
+      }
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
