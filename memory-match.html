@@ -50,7 +50,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 
-    <style>
+     <style>
         /* Memory-specific refinements */
         .memory-container {
             max-width: 640px;
@@ -226,10 +226,78 @@
             font-weight: 900;
             font-size: 1rem;
         }
+        .image-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0 20px;
+            background: var(--cream-2);
+            border-radius: 32px;
+            padding: 30px 20px;
+        }
+        .image-showcase figure {
+            max-width: 280px;
+            margin: 0;
+            text-align: center;
+        }
+        .image-showcase img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            background: #f0ebe6;
+            display: block;
+        }
+        .image-showcase figcaption {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--ink-3);
+            font-weight: 500;
+        }
+        .image-showcase .caption-strong {
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .long-text {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+        .long-text h3 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            color: var(--ink);
+        }
+        .long-text p {
+            margin: 1rem 0;
+        }
+        .long-text ul {
+            padding-left: 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .long-text li {
+            margin: 0.4rem 0;
+        }
+        .kw-tag {
+            background: var(--cream-3);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ink-2);
+            border: 1px solid rgba(0,0,0,0.04);
+            display: inline-block;
+        }
         @media (max-width: 500px) {
             .cards-grid { gap: 6px; }
             .card { font-size: 1.6rem; border-radius: 12px; min-width: 36px; min-height: 36px; }
             .game-stats { gap: 12px; font-size: 0.8rem; padding: 8px 14px; }
+            .image-showcase { padding: 20px 12px; gap: 20px; }
         }
         @media (max-width: 400px) {
             .cards-grid[data-size="6"] { grid-template-columns: repeat(4, 1fr); }
@@ -356,6 +424,88 @@
                     <h4>Timer &amp; Moves</h4>
                     <p>Track your performance and try to beat your best.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- IMAGE SHOWCASE SECTION -->
+    <section class="section" style="background: var(--white); padding-top: 20px; padding-bottom: 20px;">
+        <div class="section-inner">
+            <div class="image-showcase">
+                <figure>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0ebe6'/%3E%3Ctext x='50' y='160' font-family='system-ui, sans-serif' font-size='28' fill='%23655a4f'%3E🧠 Memory grid%3C/text%3E%3C/svg%3E"
+                         alt="Memory match card grid showing flipped and matched cards" width="400" height="300" loading="lazy">
+                    <figcaption><span class="caption-strong">Match pairs:</span> Flip cards and find the matching symbols.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0ebe6'/%3E%3Ctext x='50' y='160' font-family='system-ui, sans-serif' font-size='28' fill='%23655a4f'%3E⏱️ Timer &amp; moves%3C/text%3E%3C/svg%3E"
+                         alt="Game stats showing timer, move counter, and matches" width="400" height="300" loading="lazy">
+                    <figcaption><span class="caption-strong">Track performance:</span> Timer and move counter help you improve.</figcaption>
+                </figure>
+                <figure>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0ebe6'/%3E%3Ctext x='50' y='160' font-family='system-ui, sans-serif' font-size='28' fill='%23655a4f'%3E📱 Mobile play%3C/text%3E%3C/svg%3E"
+                         alt="Memory match game on a mobile phone" width="400" height="300" loading="lazy">
+                    <figcaption><span class="caption-strong">Play anywhere:</span> Fully responsive on all devices.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--cream-2); padding-top: 30px; padding-bottom: 40px;">
+        <div class="section-inner long-text">
+            <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem,2.8vw,2.2rem); text-align: center;">More Than Just a Memory Game</h2>
+            <p>Memory matching games have been a beloved pastime for generations, and for good reason. They're not just fun — they're a powerful tool for cognitive development. Our <strong>online memory game</strong> takes this classic concept and elevates it with modern features, making it accessible to players of all ages. Whether you're a parent looking for a <strong>kids memory game</strong>, an adult wanting to sharpen your mind, or a teacher seeking an engaging classroom activity, this <strong>card matching game</strong> is designed to deliver.</p>
+            
+            <h3>The Cognitive Benefits of Memory Games</h3>
+            <p>Playing a <strong>memory matching game</strong> is more than just entertainment. It actively engages your brain in several key areas: <strong>visual recognition</strong>, <strong>spatial awareness</strong>, and <strong>short-term memory</strong>. When you flip a card, your brain registers the symbol and its location. When you flip another, you're recalling that information and making a decision. This process strengthens neural pathways and improves your overall cognitive function. Studies have shown that regular engagement with <strong>concentration games</strong> can enhance memory retention, increase attention span, and even reduce the risk of age-related cognitive decline.</p>
+            
+            <h3>Perfect for All Ages</h3>
+            <p><strong>For Kids:</strong> This <strong>kids memory game</strong> is an excellent educational tool. It helps children develop their memory and concentration skills in a fun, low-pressure environment. The colorful emoji symbols are easy to recognize and remember, making the game accessible to young learners. Parents and teachers can use the game to reinforce pattern recognition, improve focus, and even teach basic strategy.</p>
+            <p><strong>For Adults:</strong> It's never too late to train your brain. This <strong>brain training game</strong> offers a quick and effective mental workout. The two difficulty levels (4x4 and 6x6) allow you to start at a comfortable level and progress as your skills improve. The timer and move counter provide measurable feedback, so you can track your improvement over time. It's the perfect game for a mental break during work or a fun challenge to share with friends.</p>
+            <p><strong>For Seniors:</strong> Memory games are particularly beneficial for older adults. They help keep the mind active and engaged, which is crucial for maintaining cognitive health. The simple, intuitive interface makes it easy for anyone to play, regardless of their tech proficiency. The large, clear cards and responsive design ensure a comfortable experience on any device.</p>
+            
+            <h3>Features That Make a Difference</h3>
+            <ul>
+                <li><strong>Two Difficulty Levels:</strong> Choose between a 4x4 grid (8 pairs) for a relaxed experience or a 6x6 grid (18 pairs) for a serious challenge. The 6x6 mode is perfect for experienced players who want to test their limits.</li>
+                <li><strong>Timer and Move Counter:</strong> Track how long you take and how many moves you make. These metrics provide valuable feedback and help you set personal goals. Try to beat your best time or minimize your moves.</li>
+                <li><strong>Emoji-Based Symbols:</strong> The cards use fun, colorful emojis like ★, ●, ▲, ◆, ❤, ✦, and more. These symbols are universally recognizable and add a playful element to the game.</li>
+                <li><strong>Instant Feedback:</strong> When you flip two cards, the game immediately tells you if they match. A green checkmark appears on matched cards, and the status message keeps you informed throughout the game.</li>
+                <li><strong>No Sign-Up, No Ads:</strong> You can start playing immediately without any interruptions. There are no intrusive ads to distract you during gameplay.</li>
+            </ul>
+            
+            <h3>How to Play and Win</h3>
+            <p>The rules are simple: flip two cards at a time. If they match, they stay face-up. If they don't, they flip back over. The goal is to match all pairs on the board. The game starts with all cards face-down. When you flip your first card, the timer starts automatically. Each time you flip two cards, your move count increases by one. If you match a pair, the match counter goes up. The game is won when all pairs have been matched, and a victory message will appear.</p>
+            <p>To get the best score, try to remember the locations of the symbols. A good strategy is to systematically flip cards in a pattern, like row by row, to maximize your chances of remembering where each symbol is. As you play more rounds, you'll naturally develop better memory strategies. The 6x6 grid requires a higher level of concentration, making it a great challenge for experienced players.</p>
+            
+            <h3>Educational Applications</h3>
+            <p>Teachers can use this <strong>online memory game</strong> in countless ways. It's perfect for:</p>
+            <ul>
+                <li><strong>Brain breaks:</strong> A quick 5-minute game can help students reset and refocus.</li>
+                <li><strong>Skill building:</strong> It's a great way to improve memory and concentration in a fun, engaging format.</li>
+                <li><strong>Group activities:</strong> Project the game on a screen and have students take turns flipping cards. This promotes teamwork and collective problem-solving.</li>
+                <li><strong>Special education:</strong> The visual nature of the game makes it accessible to students with different learning needs.</li>
+            </ul>
+            
+            <h3>Why Choose Our Memory Match Game?</h3>
+            <p>There are many <strong>matching pairs</strong> games online, but ours stands out for several reasons. First, it's completely free and always will be. Second, it's designed with user experience in mind — the interface is clean, the cards are responsive, and the feedback is immediate. Third, it offers genuine cognitive benefits while being genuinely fun to play. Whether you're looking for a <strong>brain game online</strong> to sharpen your skills or a fun way to pass the time, our <strong>concentration game</strong> delivers on all fronts.</p>
+            
+            <h3>Frequently Asked Questions</h3>
+            <ul>
+                <li><strong>Is this memory game free?</strong> Yes, completely free with no sign-up or ads during gameplay.</li>
+                <li><strong>Can I play on my phone?</strong> Absolutely. The game is fully responsive and touch-friendly.</li>
+                <li><strong>How do I win?</strong> Match all pairs on the board. A victory message will appear.</li>
+                <li><strong>What symbols are used?</strong> Fun emojis like ★, ●, ▲, ◆, ❤, ✦, and more.</li>
+            </ul>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 30px 0 10px;">
+                <span class="kw-tag">memory match game</span>
+                <span class="kw-tag">matching pairs</span>
+                <span class="kw-tag">concentration game</span>
+                <span class="kw-tag">brain game online</span>
+                <span class="kw-tag">kids memory game</span>
+                <span class="kw-tag">card matching game</span>
+                <span class="kw-tag">cognitive training</span>
+                <span class="kw-tag">free memory game</span>
             </div>
         </div>
     </section>
