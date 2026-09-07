@@ -11,7 +11,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-Y4P4DT6K1Q');
-</script> 
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Spin the wheel - Random picker for games, decisions, giveaways. Free customizable wheel spinner with sound, images, presets, and history.">
@@ -106,12 +106,8 @@
                             <button id="clear-btn" class="ctrl-btn">🗑️ Clear All</button>
                             <button id="sort-btn" class="ctrl-btn">🔠 Sort A-Z</button>
                             <button id="shuffle-btn" class="ctrl-btn">🔄 Shuffle</button>
-                            <button id="sound-btn" class="ctrl-btn">🔊 Sound On</button>                            
+                            <button id="sound-btn" class="ctrl-btn">🔊 Sound On</button>
                         </div>
-                        <div class="toggle-row">
-    <input type="checkbox" id="video-toggle" checked>
-    <label for="video-toggle">🎬 Enable Spin & Winner Videos</label>
-</div>
                     </div>
 
                     <!-- RIGHT: Control Panel (Tabs) -->
@@ -475,31 +471,6 @@
         </div>
     </div>
     <div id="confetti-container"></div>
-
-        <!-- ===== VIDEO OVERLAYS ===== -->
-    <!-- Spin Animation Video -->
-    <div id="video-overlay" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
-        <div style="position:relative;max-width:90%;max-height:90%;">
-            <video id="spin-video" style="width:100%;height:100%;max-height:80vh;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" muted playsinline>
-                <source src="videos/spin-animation.mp4" type="video/mp4">
-                <!-- Fallback: if video doesn't load, show animated text -->
-                <div style="color:white;text-align:center;padding:40px;font-size:2rem;">🎡 Spinning...</div>
-            </video>
-            <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.5);font-size:0.8rem;font-family:'Nunito',sans-serif;">🎡 Spin in progress...</div>
-        </div>
-    </div>
-
-    <!-- Winner Animation Video -->
-    <div id="win-video-overlay" style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
-        <div style="position:relative;max-width:90%;max-height:90%;">
-            <video id="win-video" style="width:100%;height:100%;max-height:80vh;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" muted playsinline>
-                <source src="videos/winner-animation.mp4" type="video/mp4">
-                <!-- Fallback: if video doesn't load, show animated text -->
-                <div style="color:white;text-align:center;padding:40px;font-size:2rem;">🎉 Winner!</div>
-            </video>
-            <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.5);font-size:0.8rem;font-family:'Nunito',sans-serif;">🏆 Congratulations!</div>
-        </div>
-    </div>
 
     <!-- Scripts: header.js and footer.js are loaded from js folder first; app.js contains main logic -->
     <script src="js/header.js" defer></script>
