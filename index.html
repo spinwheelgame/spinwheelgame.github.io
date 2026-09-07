@@ -57,9 +57,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -87,7 +84,7 @@
             </div>
         </section>
 
-        <!-- MAIN WEB APPLICATION: Spin Wheel Game Core (UPDATED) -->
+        <!-- MAIN WEB APPLICATION: Spin Wheel Game Core -->
         <section id="app-main" class="app-section">
             <div class="section-inner">
                 <div class="app-section-title-wrap">
@@ -98,77 +95,89 @@
                 <div class="app-layout">
                     <!-- LEFT: Wheel Area -->
                     <div class="wheel-area">
-                        <div class="canvas-wrap">
-                            <canvas id="wheelCanvas" width="600" height="600"></canvas>
-                            <div class="pointer"></div>
+                        <div class="wheel-canvas-wrap">
+                            <canvas id="wheel-canvas" width="520" height="520"></canvas>
+                            <div class="wheel-pointer" id="wheel-pointer"></div>
                         </div>
                         <div class="spin-btn-wrap">
-                            <button id="spinBtn">🎯 SPIN</button>
+                            <button id="spin-btn" class="btn-primary" style="background: var(--grad-main);">🎯 SPIN!</button>
                         </div>
-                        <div class="controls">
-                            <button class="ctrl-btn" id="clearBtn"><i class="fas fa-trash-alt"></i> Clear</button>
-                            <button class="ctrl-btn" id="sortBtn"><i class="fas fa-sort-alpha-down"></i> Sort</button>
-                            <button class="ctrl-btn" id="shuffleBtn"><i class="fas fa-random"></i> Shuffle</button>
-                            <button class="ctrl-btn" id="soundBtn"><i class="fas fa-volume-up"></i> Sound</button>
+                        <div class="wheel-controls">
+                            <button id="clear-btn" class="ctrl-btn">🗑️ Clear All</button>
+                            <button id="sort-btn" class="ctrl-btn">🔠 Sort A-Z</button>
+                            <button id="shuffle-btn" class="ctrl-btn">🔄 Shuffle</button>
+                            <button id="sound-btn" class="ctrl-btn">🔊 Sound On</button>
                         </div>
                     </div>
 
                     <!-- RIGHT: Control Panel (Tabs) -->
-                    <div class="panel">
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="tabOptions"><i class="fas fa-list-ul"></i> Options</button>
-                            <button class="tab-btn" data-tab="tabPresets"><i class="fas fa-box"></i> Presets</button>
-                            <button class="tab-btn" data-tab="tabStyle"><i class="fas fa-palette"></i> Style</button>
+                    <div class="wheel-panel">
+                        <div class="panel-tabs">
+                            <button class="tab-btn active" data-tab="options-tab">🎨 Options</button>
+                            <button class="tab-btn" data-tab="presets-tab">📦 Presets</button>
+                            <button class="tab-btn" data-tab="palette-tab">🎨 Palette</button>
+                            <button class="tab-btn" data-tab="settings-tab">⚙️ Settings</button>
                         </div>
 
                         <!-- Options Tab -->
-                        <div id="tabOptions" class="tab-content active">
-                            <div id="itemsList" class="items-list"></div>
-                            <button id="addItemBtn" class="add-btn"><i class="fas fa-plus-circle"></i> Add Option</button>
-                            <div class="bulk-area">
-                                <textarea id="bulkInput" rows="2" placeholder="One option per line..."></textarea>
-                                <button id="bulkApplyBtn">Apply Bulk</button>
+                        <div id="options-tab" class="tab-panel active">
+                            <div id="items-list" class="items-list"></div>
+                            <div class="items-actions">
+                                <button id="add-item-btn">+ Add Option</button>
                             </div>
                         </div>
 
                         <!-- Presets Tab -->
-                        <div id="tabPresets" class="tab-content">
+                        <div id="presets-tab" class="tab-panel">
                             <div class="presets-grid">
-                                <button class="preset-btn" data-preset="yesno">✅ Yes/No</button>
-                                <button class="preset-btn" data-preset="days">📆 Days</button>
-                                <button class="preset-btn" data-preset="numbers10">🔢 1-10</button>
-                                <button class="preset-btn" data-preset="food">🍕 Food</button>
-                                <button class="preset-btn" data-preset="colors">🎨 Colors</button>
-                                <button class="preset-btn" data-preset="emoji">😀 Emoji</button>
-                                <button class="preset-btn" data-preset="luck">🍀 Luck</button>
+                                <button class="preset-btn" data-preset="yesno">✅ Yes / No</button>
+                                <button class="preset-btn" data-preset="truefalse">🔘 True / False</button>
+                                <button class="preset-btn" data-preset="days">📆 Days of Week</button>
+                                <button class="preset-btn" data-preset="numbers10">🔢 1–10</button>
+                                <button class="preset-btn" data-preset="numbers20">🔢 1–20</button>
+                                <button class="preset-btn" data-preset="colors">🎨 Color Wheel</button>
+                                <button class="preset-btn" data-preset="luck">🍀 Luck & Fortune</button>
+                                <button class="preset-btn" data-preset="food">🍕 Food Wheel</button>
                                 <button class="preset-btn" data-preset="directions">🧭 Directions</button>
+                                <button class="preset-btn" data-preset="emoji">😀 Emoji Fun</button>
                             </div>
-                            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
-                                <label style="display:flex;align-items:center;gap:6px;color:#bbb;font-weight:600;font-size:0.8rem;">
-                                    <input type="checkbox" id="removeWinnerToggle"> Eliminate winner
-                                </label>
-                                <label style="display:flex;align-items:center;gap:6px;color:#bbb;font-weight:600;font-size:0.8rem;">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                    <select id="speedSelect" style="border-radius:20px;padding:4px 10px;background:rgba(0,0,0,0.3);color:#eee;border:1px solid rgba(255,255,255,0.1);">
-                                        <option value="2500">Fast</option>
-                                        <option value="4000" selected>Normal</option>
-                                        <option value="6500">Slow</option>
-                                    </select>
-                                </label>
-                            </div>
+                            <p style="font-size: 0.8rem; color: #6B6B8A; margin-top: 12px;">Click any preset to instantly customize your spin wheel.</p>
                         </div>
 
-                        <!-- Style Tab -->
-                        <div id="tabStyle" class="tab-content">
+                        <!-- Palette Tab -->
+                        <div id="palette-tab" class="tab-panel">
                             <div class="palette-row">
-                                <button class="palette-btn active" data-palette="classic"><span class="swatch"><span style="background:#FF6B6B"></span><span style="background:#FF9F43"></span><span style="background:#FECA57"></span></span> Classic</button>
-                                <button class="palette-btn" data-palette="pastel"><span class="swatch"><span style="background:#FFC8DD"></span><span style="background:#BDE0FE"></span><span style="background:#CDB4DB"></span></span> Pastel</button>
-                                <button class="palette-btn" data-palette="neon"><span class="swatch"><span style="background:#FF073A"></span><span style="background:#00FF41"></span><span style="background:#08FDD8"></span></span> Neon</button>
-                                <button class="palette-btn" data-palette="dark"><span class="swatch"><span style="background:#2d2d44"></span><span style="background:#4a4a6a"></span><span style="background:#6a6a8a"></span></span> Dark</button>
+                                <button class="palette-btn active" data-palette="classic"><div class="palette-swatch"><span style="background:#FF6B6B"></span><span style="background:#FF9F43"></span><span style="background:#FECA57"></span><span style="background:#48DBFB"></span></div> Classic</button>
+                                <button class="palette-btn" data-palette="pastel"><div class="palette-swatch"><span style="background:#FFC8DD"></span><span style="background:#BDE0FE"></span><span style="background:#CDB4DB"></span><span style="background:#B5EAD7"></span></div> Pastel</button>
+                                <button class="palette-btn" data-palette="neon"><div class="palette-swatch"><span style="background:#FF073A"></span><span style="background:#00FF41"></span><span style="background:#08FDD8"></span><span style="background:#A600FF"></span></div> Neon</button>
+                                <button class="palette-btn" data-palette="earth"><div class="palette-swatch"><span style="background:#8B5E3C"></span><span style="background:#D4A373"></span><span style="background:#E9C46A"></span><span style="background:#588157"></span></div> Earth</button>
+                                <button class="palette-btn" data-palette="mono"><div class="palette-swatch"><span style="background:#111111"></span><span style="background:#555555"></span><span style="background:#999999"></span><span style="background:#DDDDDD"></span></div> Mono</button>
                             </div>
-                            <div>
-                                <label style="color:#bbb;font-weight:700;font-size:0.8rem;"><i class="fas fa-history"></i> Spin History</label>
-                                <div id="historyContainer" class="history-box"></div>
+                            <p style="font-size: 0.8rem;">🌈 Change global colors — or click the color dot next to each option for individual slice colors.</p>
+                        </div>
+
+                        <!-- Settings Tab -->
+                        <div id="settings-tab" class="tab-panel">
+                            <div class="settings-group">
+                                <label class="settings-label">⏱️ Spin Speed</label>
+                                <select id="speed-select" class="speed-select">
+                                    <option value="fast">Fast (2.5s)</option>
+                                    <option value="normal" selected>Normal (4s)</option>
+                                    <option value="slow">Slow (6.5s)</option>
+                                </select>
+                            </div>
+                            <div class="toggle-row">
+                                <input type="checkbox" id="remove-winner-toggle">
+                                <label for="remove-winner-toggle">Remove winner after spin (elimination mode)</label>
+                            </div>
+                            <div class="settings-group">
+                                <label class="settings-label">📋 Bulk Import (one option per line)</label>
+                                <textarea id="bulk-input" class="bulk-input" rows="3" placeholder="Pizza&#10;Burger&#10;Sushi&#10;Tacos&#10;Salad"></textarea>
+                                <button id="bulk-apply-btn">Apply Bulk Options</button>
+                            </div>
+                            <div class="settings-group">
+                                <label class="settings-label">📜 Spin History</label>
+                                <div id="spin-history" style="max-height: 180px; overflow-y: auto;"></div>
                             </div>
                         </div>
                     </div>
@@ -449,534 +458,61 @@
     <footer id="main-site-footer" class="site-footer"></footer>
 
     <!-- Result Modal & Confetti Elements (required by app.js) -->
-    <div id="resultModal" class="modal-overlay">
+    <div id="result-modal">
         <div class="modal-box">
-            <div style="font-size:3.6rem;margin-bottom:4px;animation:popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">🎉</div>
-            <div id="resultBadge" style="background:#FF6B6B;color:white;padding:8px 28px;border-radius:60px;font-size:1.8rem;font-weight:800;">Winner</div>
-            <p id="resultText" style="font-size:1.2rem;font-weight:600;margin:12px 0;color:#ddd;">Option</p>
+            <div class="modal-emoji">🎉✨🎡</div>
+            <div class="modal-label">The wheel chose:</div>
+            <div id="result-badge" style="background:#FF6B6B; padding: 8px 28px; border-radius: 60px; font-size: 1.8rem; font-weight: 800;">Winner</div>
+            <p id="result-text" style="font-size: 1rem; margin: 8px 0 16px; font-weight: 500;">Option</p>
             <div class="modal-actions">
-                <button id="spinAgainBtn">🔄 Spin Again</button>
-                <button id="modalCloseBtn">Close</button>
+                <button id="spin-again-btn">🔄 Spin Again</button>
+                <button id="modal-close">Close</button>
             </div>
         </div>
     </div>
-    <div id="confettiContainer"></div>
+    <div id="confetti-container"></div>
 
     <!-- Scripts: header.js and footer.js are loaded from js folder first; app.js contains main logic -->
     <script src="js/header.js" defer></script>
-    <script src="js/footer.js" defer></script>    
+    <script src="js/footer.js" defer></script>
+    <script src="js/app.js" defer></script>
     
-    <!-- FAQ Accordion Logic -->
+    <!-- Additional minimal inline to ensure header/footer placeholders get structured if external js missing, but no override -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const questionBtn = item.querySelector('.faq-q');
-            questionBtn.addEventListener('click', function() {
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('open')) {
-                        otherItem.classList.remove('open');
-                    }
-                });
-                item.classList.toggle('open');
+        (function ensureContainers(){
+            // optional safe fallback for header and footer if external scripts delay but not mandatory
+            const headerEl = document.getElementById('main-site-header');
+            const footerEl = document.getElementById('main-site-footer');
+            if(){
+                // minimal placeholder style just to maintain layout, but external scripts should populate
+                headerEl.innerHTML = '';
+            }
+            if(){
+                </p></div>';
+            }
+        })();
+    </script>
+    <script>
+    // FAQ Accordion Logic
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const questionBtn = item.querySelector('.faq-q');
+        questionBtn.addEventListener('click', function() {
+            // Close all other open FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('open')) {
+                    otherItem.classList.remove('open');
+                }
             });
+            // Toggle the current one
+            item.classList.toggle('open');
         });
     });
-    </script>
+});
 
-    <!-- MAIN APP SCRIPT (UPDATED) -->
-    <script>
-    (function(){
-        // ----- STATE -----
-        const state = {
-            items: [
-                { label: 'Option 1', color: null },
-                { label: 'Option 2', color: null },
-                { label: 'Option 3', color: null },
-                { label: 'Option 4', color: null },
-                { label: 'Option 5', color: null },
-                { label: 'Option 6', color: null },
-            ],
-            spinning: false,
-            currentAngle: 0,
-            spinHistory: [],
-            removeWinner: false,
-            soundEnabled: true,
-            spinDuration: 4000,
-        };
-
-        const PALETTES = {
-            classic: ['#FF6B6B','#FF9F43','#FECA57','#48DBFB','#FF9FF3','#54A0FF','#5F27CD','#00D2D3','#1DD1A1','#C8D6E5'],
-            pastel: ['#FFC8DD','#FFAFCC','#BDE0FE','#A2D2FF','#CDB4DB','#E8D5C4','#B5EAD7','#FFDAC1','#FF9AA2','#C7CEEA'],
-            neon: ['#FF073A','#FF6700','#FFCA08','#00FF41','#08FDD8','#007BFF','#A600FF','#FF00C1','#FF6B6B','#00D4FF'],
-            dark: ['#2d2d44','#3d3d5c','#4a4a6a','#5a5a7a','#6a6a8a','#7a7a9a','#8a8aaa','#9a9aba','#aaaaca','#babada'],
-        };
-        let currentPalette = 'classic';
-
-        const WHEEL_PRESETS = {
-            yesno: ['Yes','No'],
-            days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-            numbers10: ['1','2','3','4','5','6','7','8','9','10'],
-            food: ['Pizza','Burger','Sushi','Tacos','Pasta','Salad','Ramen','BBQ'],
-            colors: ['Red','Orange','Yellow','Green','Blue','Purple','Pink','Brown'],
-            emoji: ['😀','🎉','🍕','🚀','🦄','💎','🔥','⭐','🌈','🎵'],
-            luck: ['Great Luck','Good Luck','Neutral','Bad Luck','Try Again','Jackpot!'],
-            directions: ['North','South','East','West','Spin Again'],
-        };
-
-        const canvas = document.getElementById('wheelCanvas');
-        const ctx = canvas.getContext('2d');
-        const spinBtn = document.getElementById('spinBtn');
-        const itemsList = document.getElementById('itemsList');
-        const historyContainer = document.getElementById('historyContainer');
-        const modal = document.getElementById('resultModal');
-        const resultBadge = document.getElementById('resultBadge');
-        const resultText = document.getElementById('resultText');
-        const confettiContainer = document.getElementById('confettiContainer');
-
-        function getColor(i) {
-            const item = state.items[i];
-            if (item && item.color) return item.color;
-            const palette = PALETTES[currentPalette] || PALETTES.classic;
-            return palette[i % palette.length];
-        }
-
-        function isDark(hex) {
-            if (!hex) return false;
-            const r = parseInt(hex.slice(1,3),16);
-            const g = parseInt(hex.slice(3,5),16);
-            const b = parseInt(hex.slice(5,7),16);
-            return (r*299 + g*587 + b*114) / 1000 < 128;
-        }
-
-        // ----- audio -----
-        let audioCtx;
-        function getAudio() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            return audioCtx;
-        }
-        function playTick() {
-            if (!state.soundEnabled) return;
-            try {
-                const ac = getAudio();
-                const osc = ac.createOscillator();
-                const gain = ac.createGain();
-                osc.connect(gain); gain.connect(ac.destination);
-                osc.frequency.value = 600 + Math.random() * 400;
-                osc.type = 'triangle';
-                gain.gain.setValueAtTime(0.12, ac.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.06);
-                osc.start(ac.currentTime);
-                osc.stop(ac.currentTime + 0.06);
-            } catch(e){}
-        }
-        function playWin() {
-            if (!state.soundEnabled) return;
-            try {
-                const ac = getAudio();
-                const notes = [523,659,784,1047];
-                notes.forEach((freq, i) => {
-                    const osc = ac.createOscillator();
-                    const gain = ac.createGain();
-                    osc.connect(gain); gain.connect(ac.destination);
-                    osc.frequency.value = freq;
-                    osc.type = 'sine';
-                    const t = ac.currentTime + i * 0.12;
-                    gain.gain.setValueAtTime(0, t);
-                    gain.gain.linearRampToValueAtTime(0.2, t + 0.04);
-                    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-                    osc.start(t); osc.stop(t + 0.35);
-                });
-            } catch(e){}
-        }
-
-        // ----- draw wheel with enhanced glow & gradient -----
-        function drawWheel() {
-            const n = state.items.length;
-            if (n === 0) return;
-            const w = canvas.width, h = canvas.height;
-            const cx = w/2, cy = h/2;
-            const radius = Math.min(cx, cy) - 12;
-            const arc = (2 * Math.PI) / n;
-
-            ctx.clearRect(0, 0, w, h);
-
-            // outer glow ring
-            const glow = ctx.createRadialGradient(cx, cy, radius*0.5, cx, cy, radius+16);
-            glow.addColorStop(0, 'rgba(255,200,100,0)');
-            glow.addColorStop(0.7, 'rgba(255,200,100,0.05)');
-            glow.addColorStop(1, 'rgba(255,107,107,0.15)');
-            ctx.fillStyle = glow;
-            ctx.beginPath(); ctx.arc(cx, cy, radius+16, 0, 2*Math.PI); ctx.fill();
-
-            for (let i=0; i<n; i++) {
-                const start = state.currentAngle + arc*i;
-                const end = start + arc;
-                const color = getColor(i);
-
-                // slice with subtle gradient
-                const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, radius);
-                grad.addColorStop(0, lighten(color, 40));
-                grad.addColorStop(1, color);
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, radius, start, end);
-                ctx.closePath();
-                ctx.fillStyle = grad;
-                ctx.fill();
-
-                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                const mid = start + arc/2;
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(mid);
-                const textR = radius * 0.62;
-                ctx.textAlign = 'right';
-                ctx.textBaseline = 'middle';
-                const fs = Math.max(12, Math.min(18, (arc * radius * 0.32)));
-                ctx.font = `bold ${fs}px 'Poppins', sans-serif`;
-                const isDarkColor = isDark(color);
-                ctx.fillStyle = isDarkColor ? '#fff' : '#1a1a2e';
-                ctx.shadowColor = isDarkColor ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.4)';
-                ctx.shadowBlur = 6;
-                let label = state.items[i].label;
-                if (label.length > 14) label = label.slice(0,13)+'…';
-                ctx.fillText(label, textR, 0);
-                ctx.restore();
-            }
-
-            // center ring with glow
-            const cGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 34);
-            cGrd.addColorStop(0, '#fff');
-            cGrd.addColorStop(0.5, '#f0ece6');
-            cGrd.addColorStop(1, '#d0c8c0');
-            ctx.beginPath(); ctx.arc(cx, cy, 34, 0, 2*Math.PI);
-            ctx.fillStyle = cGrd;
-            ctx.fill();
-            ctx.shadowColor = 'rgba(255,200,100,0.3)';
-            ctx.shadowBlur = 30;
-            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-            ctx.font = 'bold 24px sans-serif';
-            ctx.fillStyle = '#2d2d44';
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText('🎡', cx, cy);
-        }
-
-        function lighten(hex, amt) {
-            let r = parseInt(hex.slice(1,3),16);
-            let g = parseInt(hex.slice(3,5),16);
-            let b = parseInt(hex.slice(5,7),16);
-            r = Math.min(255, r + amt);
-            g = Math.min(255, g + amt);
-            b = Math.min(255, b + amt);
-            return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
-        }
-
-        // ----- spin -----
-        function spin() {
-            if (state.spinning || state.items.length < 2) return;
-            state.spinning = true;
-            spinBtn.disabled = true;
-            spinBtn.textContent = '🌀 Spinning...';
-
-            const n = state.items.length;
-            const arc = (2*Math.PI)/n;
-            const extra = (8 + Math.random()*6) * 2*Math.PI;
-            const stop = Math.random() * 2*Math.PI;
-            const total = extra + stop;
-            const startTime = performance.now();
-            const startAngle = state.currentAngle;
-            const duration = state.spinDuration;
-
-            let lastSector = -1;
-            function ease(t) { return 1 - Math.pow(1-t, 4); }
-
-            function step(now) {
-                const elapsed = now - startTime;
-                const t = Math.min(elapsed/duration, 1);
-                const eased = ease(t);
-                state.currentAngle = startAngle + total * eased;
-
-                const sector = Math.floor((((-state.currentAngle + Math.PI/2) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI)) / arc);
-                if (sector !== lastSector) { playTick(); lastSector = sector; }
-
-                drawWheel();
-                if (t < 1) {
-                    requestAnimationFrame(step);
-                } else {
-                    state.currentAngle = startAngle + total;
-                    drawWheel();
-                    finishSpin();
-                }
-            }
-            requestAnimationFrame(step);
-        }
-
-        function finishSpin() {
-            state.spinning = false;
-            spinBtn.disabled = false;
-            spinBtn.textContent = '🎯 SPIN';
-
-            const n = state.items.length;
-            const arc = (2*Math.PI)/n;
-            const angle = ((-state.currentAngle) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
-            const winIndex = Math.floor(angle / arc) % n;
-            const winner = state.items[winIndex];
-
-            state.spinHistory.unshift({ label: winner.label, time: new Date().toLocaleTimeString() });
-            if (state.spinHistory.length > 20) state.spinHistory.pop();
-
-            playWin();
-            showResult(winner.label, getColor(winIndex));
-            updateHistory();
-            createSparkleBurst();
-            confettiBurst();
-        }
-
-        function showResult(label, color) {
-            resultBadge.style.background = color;
-            resultBadge.style.color = isDark(color) ? '#fff' : '#1a1a2e';
-            resultBadge.textContent = label;
-            resultText.textContent = '🎯 winner!';
-            modal.classList.add('show');
-        }
-
-        function confettiBurst() {
-            confettiContainer.innerHTML = '';
-            const colors = ['#FF6B6B','#FF9F43','#FECA57','#48DBFB','#FF9FF3','#54A0FF','#1DD1A1','#FF073A','#00FF41'];
-            for (let i=0; i<60; i++) {
-                const el = document.createElement('div');
-                el.className = 'confetti-piece';
-                const size = 6 + Math.random()*12;
-                el.style.cssText = `
-                    left:${Math.random()*100}%;
-                    background:${colors[Math.floor(Math.random()*colors.length)]};
-                    width:${size}px; height:${size}px;
-                    animation-delay:${Math.random()*0.5}s;
-                    animation-duration:${1.2+Math.random()*1.4}s;
-                    border-radius:${Math.random()>0.5?'50%':'2px'};
-                    box-shadow: 0 0 12px ${colors[Math.floor(Math.random()*colors.length)]}88;
-                `;
-                confettiContainer.appendChild(el);
-            }
-            setTimeout(() => confettiContainer.innerHTML = '', 3500);
-        }
-
-        function createSparkleBurst() {
-            const emojis = ['✨','⭐','🌟','💫','🎉','🔥','🌈'];
-            for (let i=0; i<16; i++) {
-                const el = document.createElement('div');
-                el.className = 'sparkle';
-                el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-                const x = 10 + Math.random()*80;
-                const y = 10 + Math.random()*80;
-                const tx = (Math.random()-0.5)*400;
-                const ty = (Math.random()-0.5)*400 - 120;
-                el.style.left = x + '%';
-                el.style.top = y + '%';
-                el.style.setProperty('--tx', tx+'px');
-                el.style.setProperty('--ty', ty+'px');
-                el.style.fontSize = (1.4 + Math.random()*2) + 'rem';
-                el.style.filter = 'drop-shadow(0 0 20px rgba(255,200,100,0.6))';
-                document.body.appendChild(el);
-                setTimeout(() => el.remove(), 1500);
-            }
-        }
-
-        // ----- render items -----
-        function renderItems() {
-            itemsList.innerHTML = '';
-            state.items.forEach((item, i) => {
-                const row = document.createElement('div');
-                row.className = 'item-row';
-                row.innerHTML = `
-                    <span class="color-dot" style="background:${getColor(i)}" data-index="${i}"></span>
-                    <input class="item-input" value="${item.label}" data-index="${i}" maxlength="30" placeholder="Option">
-                    <button class="item-delete" data-index="${i}"><i class="fas fa-times"></i></button>
-                `;
-                itemsList.appendChild(row);
-            });
-            itemsList.querySelectorAll('.item-input').forEach(inp => {
-                inp.addEventListener('input', e => {
-                    const idx = +e.target.dataset.index;
-                    state.items[idx].label = e.target.value || 'Option';
-                    drawWheel();
-                });
-            });
-            itemsList.querySelectorAll('.item-delete').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    const idx = +e.target.dataset.index;
-                    if (state.items.length <= 2) { alert('Minimum 2 options'); return; }
-                    state.items.splice(idx, 1);
-                    renderItems();
-                    drawWheel();
-                });
-            });
-            itemsList.querySelectorAll('.color-dot').forEach(dot => {
-                dot.addEventListener('click', e => {
-                    const idx = +e.target.dataset.index;
-                    const input = document.createElement('input');
-                    input.type = 'color';
-                    input.value = getColor(idx);
-                    input.style.position = 'fixed'; input.style.opacity='0';
-                    document.body.appendChild(input);
-                    input.click();
-                    input.addEventListener('change', () => {
-                        state.items[idx].color = input.value;
-                        renderItems();
-                        drawWheel();
-                        document.body.removeChild(input);
-                    });
-                    input.addEventListener('blur', () => { if (document.body.contains(input)) document.body.removeChild(input); });
-                });
-            });
-        }
-
-        function updateHistory() {
-            if (state.spinHistory.length === 0) {
-                historyContainer.innerHTML = '<div style="color:#666;text-align:center;padding:10px;">No spins yet</div>';
-                return;
-            }
-            historyContainer.innerHTML = state.spinHistory.map((h, i) =>
-                `<div class="hist-item ${i===0?'hist-latest':''}"><span>${i===0?'🏆 ':''}${h.label}</span><span>${h.time}</span></div>`
-            ).join('');
-        }
-
-        function loadPreset(key) {
-            const items = WHEEL_PRESETS[key];
-            if (!items) return;
-            state.items = items.map(label => ({ label, color: null }));
-            renderItems();
-            drawWheel();
-        }
-
-        function setPalette(name) {
-            currentPalette = name;
-            state.items.forEach(it => it.color = null);
-            document.querySelectorAll('.palette-btn').forEach(b => b.classList.toggle('active', b.dataset.palette === name));
-            renderItems();
-            drawWheel();
-        }
-
-        // ----- init -----
-        function init() {
-            renderItems();
-            drawWheel();
-            updateHistory();
-
-            spinBtn.addEventListener('click', spin);
-            canvas.addEventListener('click', () => { if (!state.spinning) spin(); });
-
-            document.getElementById('addItemBtn').addEventListener('click', () => {
-                if (state.items.length >= 20) { alert('Max 20 options'); return; }
-                state.items.push({ label: `Option ${state.items.length+1}`, color: null });
-                renderItems();
-                drawWheel();
-            });
-
-            document.getElementById('clearBtn').addEventListener('click', () => {
-                if (!confirm('Clear all?')) return;
-                state.items = [{ label: 'Option 1', color: null }, { label: 'Option 2', color: null }];
-                renderItems(); drawWheel();
-            });
-
-            document.getElementById('sortBtn').addEventListener('click', () => {
-                state.items.sort((a,b) => a.label.localeCompare(b.label));
-                renderItems(); drawWheel();
-            });
-
-            document.getElementById('shuffleBtn').addEventListener('click', () => {
-                for (let i=state.items.length-1; i>0; i--) {
-                    const j = Math.floor(Math.random()*(i+1));
-                    [state.items[i], state.items[j]] = [state.items[j], state.items[i]];
-                }
-                renderItems(); drawWheel();
-            });
-
-            document.getElementById('soundBtn').addEventListener('click', function() {
-                state.soundEnabled = !state.soundEnabled;
-                this.innerHTML = state.soundEnabled ? '<i class="fas fa-volume-up"></i> Sound' : '<i class="fas fa-volume-mute"></i> Mute';
-            });
-
-            document.getElementById('speedSelect').addEventListener('change', e => {
-                state.spinDuration = +e.target.value;
-            });
-
-            document.querySelectorAll('.preset-btn').forEach(btn => {
-                btn.addEventListener('click', () => loadPreset(btn.dataset.preset));
-            });
-
-            document.querySelectorAll('.palette-btn').forEach(btn => {
-                btn.addEventListener('click', () => setPalette(btn.dataset.palette));
-            });
-
-            document.getElementById('removeWinnerToggle').addEventListener('change', e => {
-                state.removeWinner = e.target.checked;
-            });
-
-            document.getElementById('bulkApplyBtn').addEventListener('click', () => {
-                const raw = document.getElementById('bulkInput').value.trim();
-                if (!raw) return;
-                const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-                if (lines.length < 2) { alert('Need at least 2'); return; }
-                if (lines.length > 20) { alert('Max 20'); return; }
-                state.items = lines.map(label => ({ label, color: null }));
-                renderItems(); drawWheel();
-                document.getElementById('bulkInput').value = '';
-            });
-
-            document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-            document.getElementById('spinAgainBtn').addEventListener('click', () => {
-                closeModal();
-                setTimeout(spin, 300);
-            });
-            modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-
-            function closeModal() {
-                modal.classList.remove('show');
-                if (state.removeWinner && state.spinHistory.length > 0) {
-                    const winnerLabel = state.spinHistory[0].label;
-                    state.items = state.items.filter(it => it.label !== winnerLabel);
-                    if (state.items.length < 1) state.items = [{ label: '🎉 Done!', color: null }];
-                    renderItems(); drawWheel();
-                }
-            }
-
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById(btn.dataset.tab).classList.add('active');
-                });
-            });
-
-            // Reset button (added to header actions)
-            document.getElementById('resetBtn').addEventListener('click', () => {
-                if (confirm('Reset to default?')) {
-                    state.items = [
-                        { label: 'Option 1', color: null },
-                        { label: 'Option 2', color: null },
-                        { label: 'Option 3', color: null },
-                        { label: 'Option 4', color: null },
-                    ];
-                    state.spinHistory = [];
-                    state.currentAngle = 0;
-                    renderItems();
-                    drawWheel();
-                    updateHistory();
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
-    })();
+document.addEventListener('DOMContentLoaded', WheelApp.init);
     </script>
 </body>
 </html>
