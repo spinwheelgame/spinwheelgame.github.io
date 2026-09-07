@@ -264,7 +264,13 @@
     <section class="section" style="padding-top: 20px;">
         <div class="section-inner rps-container">
 
-            <span class="eyebrow">✊ classic game</span>
+            <span class="eyebrow">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:4px;">
+                    <path d="M12 2C10.5 4 8 5 6 7c-2 2-3 5-2 8s3 6 6 6c3 0 5-2 6-4s2-5 0-8c-1-1.5-3-2.5-4-4z" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="2" fill="#ff6b6b" stroke="none"/>
+                </svg>
+                classic game
+            </span>
             <h1 style="font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; letter-spacing: -0.5px;">
                 Rock Paper Scissors – <span class="grad-text">Beat the Computer</span>
             </h1>
@@ -274,20 +280,58 @@
 
             <!-- SCOREBOARD -->
             <div class="scoreboard" id="scoreboard">
-                <div class="score-item win">🏆 <span class="num" id="winCount">0</span></div>
-                <div class="score-item lose">💀 <span class="num" id="loseCount">0</span></div>
-                <div class="score-item tie">🤝 <span class="num" id="tieCount">0</span></div>
+                <div class="score-item win">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;display:block;">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M12 6v4M10 8h4" stroke="#fdcb6e" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="num" id="winCount">0</span>
+                </div>
+                <div class="score-item lose">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;display:block;">
+                        <circle cx="12" cy="12" r="10" stroke="#d63031" stroke-width="2"/>
+                        <line x1="12" y1="8" x2="12" y2="12" stroke="#d63031" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="12" cy="16" r="1.5" fill="#d63031" stroke="none"/>
+                    </svg>
+                    <span class="num" id="loseCount">0</span>
+                </div>
+                <div class="score-item tie">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;display:block;">
+                        <circle cx="12" cy="12" r="10" stroke="#00b894" stroke-width="2"/>
+                        <path d="M8 12l2.5 2.5L16 9" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="num" id="tieCount">0</span>
+                </div>
             </div>
 
             <!-- MOVE DISPLAY (shows what was chosen) -->
             <div class="move-display">
                 <div>
-                    <span class="move-icon" id="playerMoveIcon">🤚</span>
+                    <span class="move-icon" id="playerMoveIcon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;display:block;margin:0 auto;">
+                            <circle cx="12" cy="12" r="9" stroke="#b2bec3" stroke-width="1.8"/>
+                            <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="#b2bec3" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="2" fill="#b2bec3" stroke="none"/>
+                        </svg>
+                    </span>
                     <span id="playerMoveLabel">You</span>
                 </div>
-                <span style="font-size: 1.8rem;">⚡</span>
+                <span style="font-size: 1.8rem;">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;display:block;">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </span>
                 <div>
-                    <span class="move-icon" id="cpuMoveIcon">🤖</span>
+                    <span class="move-icon" id="cpuMoveIcon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;display:block;margin:0 auto;">
+                            <rect x="2" y="4" width="20" height="16" rx="2" stroke="#636e72" stroke-width="1.8"/>
+                            <rect x="6" y="8" width="12" height="8" rx="1" stroke="#636e72" stroke-width="1.5"/>
+                            <circle cx="9" cy="12" r="1" fill="#636e72"/>
+                            <circle cx="15" cy="12" r="1" fill="#636e72"/>
+                            <line x1="6" y1="18" x2="6" y2="20" stroke="#636e72" stroke-width="1.8" stroke-linecap="round"/>
+                            <line x1="18" y1="18" x2="18" y2="20" stroke="#636e72" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </span>
                     <span id="cpuMoveLabel">Computer</span>
                 </div>
             </div>
@@ -295,15 +339,44 @@
             <!-- CHOICE BUTTONS -->
             <div class="rps-choices">
                 <button class="rps-btn" data-move="Rock">
-                    <span class="icon">✊</span>
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;display:block;">
+                            <path d="M12 2C10.5 4 8 5 6 7c-2 2-3 5-2 8s3 6 6 6c3 0 5-2 6-4s2-5 0-8c-1-1.5-3-2.5-4-4z" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 2v3M12 19v3M9 5l-2-2M15 5l2-2M6 9l-3 1M18 9l3 1" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="2" fill="#6c5ce7" stroke="none"/>
+                            <path d="M12 10v4M10 12h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
                     <span class="label">Rock</span>
                 </button>
                 <button class="rps-btn" data-move="Paper">
-                    <span class="icon">✋</span>
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;display:block;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="14 2 14 8 20 8" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="8" y1="13" x2="16" y2="13" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="8" y1="17" x2="16" y2="17" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="8" y1="9" x2="10" y2="9" stroke="#00b894" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="16" cy="13" r="1.5" fill="#00b894" stroke="none"/>
+                        </svg>
+                    </span>
                     <span class="label">Paper</span>
                 </button>
                 <button class="rps-btn" data-move="Scissors">
-                    <span class="icon">✌️</span>
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;display:block;">
+                            <circle cx="6" cy="6" r="3" stroke="#e17055" stroke-width="2"/>
+                            <circle cx="6" cy="18" r="3" stroke="#e17055" stroke-width="2"/>
+                            <line x1="8.5" y1="8.5" x2="15.5" y2="15.5" stroke="#e17055" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="8.5" y1="15.5" x2="15.5" y2="8.5" stroke="#e17055" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="18" cy="6" r="3" stroke="#e17055" stroke-width="2"/>
+                            <circle cx="18" cy="18" r="3" stroke="#e17055" stroke-width="2"/>
+                            <circle cx="6" cy="6" r="1.5" fill="#e17055" stroke="none"/>
+                            <circle cx="6" cy="18" r="1.5" fill="#e17055" stroke="none"/>
+                            <circle cx="18" cy="6" r="1.5" fill="#e17055" stroke="none"/>
+                            <circle cx="18" cy="18" r="1.5" fill="#e17055" stroke="none"/>
+                        </svg>
+                    </span>
                     <span class="label">Scissors</span>
                 </button>
             </div>
@@ -316,12 +389,21 @@
 
             <!-- ACTION ROW -->
             <div class="action-row">
-                <button class="btn btn-primary" id="resetBtn">🔄 Reset Scores</button>
+                <button class="btn btn-primary" id="resetBtn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:6px;">
+                        <polyline points="1 4 1 10 7 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Reset Scores
+                </button>
             </div>
 
             <!-- WIN STREAK BANNER -->
             <div id="streakBanner" style="display: none; background: linear-gradient(135deg, #fff3cd, #ffeaa7); padding: 8px 18px; border-radius: 60px; margin-top: 14px; font-weight: 800; color: #856404; font-size: 0.9rem;">
-                🔥 Win Streak!
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:6px;">
+                    <path d="M12 2L14.5 9H22L16 14L18.5 21L12 16.5L5.5 21L8 14L2 9H9.5L12 2Z" stroke="#856404" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Win Streak!
             </div>
         </div>
     </section>
