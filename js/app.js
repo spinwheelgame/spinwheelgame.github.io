@@ -20,6 +20,8 @@ const WheelApp = (() => {
     soundEnabled: true,
     showResult: false,
     pendingResult: null,
+    removeWinner: false,
+    videoEnabled: true,
   };
 
   const PALETTES = {
@@ -45,6 +47,78 @@ const WheelApp = (() => {
 
   let canvas, ctx, animReq;
   let currentPalette = 'classic';
+
+  /* ---- VIDEO ANIMATIONS ---- */
+  function showSpinVideo() {
+    if (!state.videoEnabled) return;
+    const overlay = document.getElementById('video-overlay');
+    const video = document.getElementById('spin-video');
+    if (!overlay || !video) return;
+    
+    overlay.style.display = 'flex';
+    overlay.classList.add('show');
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    
+    video.onended = () => {
+      overlay.classList.remove('show');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300);
+    };
+    
+    // Fallback: hide after 5 seconds if video doesn't end
+    setTimeout(() => {
+      if (overlay.classList.contains('show')) {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 300);
+      }
+    }, 5000);
+  }
+
+  function showWinVideo() {
+    if (!state.videoEnabled) return;
+    const overlay = document.getElementById('win-video-overlay');
+    const video = document.getElementById('win-video');
+    if (!overlay || !video) return;
+    
+    overlay.style.display = 'flex';
+    overlay.classList.add('show');
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    
+    video.onended = () => {
+      overlay.classList.remove('show');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300);
+    };
+    
+    // Fallback: hide after 5 seconds
+    setTimeout(() => {
+      if (overlay.classList.contains('show')) {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 300);
+      }
+    }, 5000);
+  }
+
+  function hideAllVideos() {
+    const spinOverlay = document.getElementById('video-overlay');
+    const winOverlay = document.getElementById('win-video-overlay');
+    if (spinOverlay) {
+      spinOverlay.classList.remove('show');
+      setTimeout(() => { spinOverlay.style.display = 'none'; }, 300);
+    }
+    if (winOverlay) {
+      winOverlay.classList.remove('show');
+      setTimeout(() => { winOverlay.style.display = 'none'; }, 300);
+    }
+  }
 
   /* ---- AUDIO ---- */
   let audioCtx;
@@ -205,6 +279,9 @@ const WheelApp = (() => {
     document.getElementById('spin-btn').disabled = true;
     document.getElementById('spin-btn').textContent = 'Spinning…';
 
+    // Show spin video
+    showSpinVideo();
+
     const n = state.items.length;
     const arc = (2 * Math.PI) / n;
     const extraSpins = (8 + Math.random() * 6) * 2 * Math.PI;
@@ -247,7 +324,6 @@ const WheelApp = (() => {
     state.spinning = false;
     const n = state.items.length;
     const arc = (2 * Math.PI) / n;
-    // Pointer at top = -PI/2 relative to 0
     const angle = ((-state.currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
     const winIndex = Math.floor(angle / arc) % n;
     const winner = state.items[winIndex];
@@ -256,7 +332,15 @@ const WheelApp = (() => {
     if (state.spinHistory.length > 20) state.spinHistory.pop();
 
     playWin();
-    showResultModal(winner.label, getColor(winIndex));
+    
+    // Show winner video before modal
+    showWinVideo();
+    
+    // Delay modal to let video play
+    setTimeout(() => {
+      showResultModal(winner.label, getColor(winIndex));
+    }, 1500);
+    
     updateHistory();
 
     document.getElementById('spin-btn').disabled = false;
@@ -484,6 +568,14 @@ const WheelApp = (() => {
       btn.classList.toggle('muted', !state.soundEnabled);
     });
 
+    // Video toggle
+    const videoToggle = document.getElementById('video-toggle');
+    if (videoToggle) {
+      videoToggle.addEventListener('change', (e) => {
+        state.videoEnabled = e.target.checked;
+      });
+    }
+
     // Speed
     document.getElementById('speed-select').addEventListener('change', e => {
       const v = e.target.value;
@@ -513,6 +605,7 @@ const WheelApp = (() => {
     // Result modal close
     document.getElementById('modal-close').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
+      hideAllVideos();
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
@@ -522,6 +615,7 @@ const WheelApp = (() => {
     });
     document.getElementById('spin-again-btn').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
+      hideAllVideos();
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
