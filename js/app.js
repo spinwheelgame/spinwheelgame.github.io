@@ -20,6 +20,8 @@ const WheelApp = (() => {
     soundEnabled: true,
     showResult: false,
     pendingResult: null,
+    removeWinner: false,
+    darkMode: true,
   };
 
   const PALETTES = {
@@ -45,6 +47,40 @@ const WheelApp = (() => {
 
   let canvas, ctx, animReq;
   let currentPalette = 'classic';
+
+  /* ---- WINNER VIDEO POPUP ---- */
+  function showWinnerVideoPopup(label, color) {
+    const modal = document.getElementById('result-modal');
+    const badge = document.getElementById('result-badge');
+    const text = document.getElementById('result-text');
+    const video = document.getElementById('winner-video');
+    const videoContainer = document.getElementById('winner-video-container');
+    
+    // Update text and color
+    badge.style.background = color;
+    badge.style.color = isDark(color) ? '#fff' : '#222';
+    text.textContent = label;
+    
+    // Show modal
+    modal.classList.add('show');
+    
+    // Play video
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      
+      // Hide video container after video ends
+      video.onended = () => {
+        videoContainer.style.display = 'none';
+      };
+      
+      // Show video container
+      videoContainer.style.display = 'block';
+    }
+    
+    // Confetti burst
+    confettiBurst();
+  }
 
   /* ---- AUDIO ---- */
   let audioCtx;
@@ -247,7 +283,6 @@ const WheelApp = (() => {
     state.spinning = false;
     const n = state.items.length;
     const arc = (2 * Math.PI) / n;
-    // Pointer at top = -PI/2 relative to 0
     const angle = ((-state.currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
     const winIndex = Math.floor(angle / arc) % n;
     const winner = state.items[winIndex];
@@ -256,7 +291,7 @@ const WheelApp = (() => {
     if (state.spinHistory.length > 20) state.spinHistory.pop();
 
     playWin();
-    showResultModal(winner.label, getColor(winIndex));
+    showWinnerVideoPopup(winner.label, getColor(winIndex));
     updateHistory();
 
     document.getElementById('spin-btn').disabled = false;
@@ -429,6 +464,25 @@ const WheelApp = (() => {
     drawWheel();
   }
 
+  /* ---- DARK MODE TOGGLE ---- */
+  function toggleDarkMode() {
+    state.darkMode = !state.darkMode;
+    const appSection = document.querySelector('.app-section');
+    const wheelPanel = document.querySelector('.wheel-panel');
+    const itemsList = document.querySelector('.items-list');
+    
+    if (state.darkMode) {
+      appSection.classList.add('dark-mode');
+      wheelPanel.classList.add('dark-mode');
+    } else {
+      appSection.classList.remove('dark-mode');
+      wheelPanel.classList.remove('dark-mode');
+    }
+    
+    const btn = document.getElementById('dark-mode-btn');
+    btn.textContent = state.darkMode ? '🌙 Dark Mode' : '☀️ Light Mode';
+  }
+
   /* ---- RESIZE ---- */
   function resizeCanvas() {
     const container = document.getElementById('wheel-canvas-wrap');
@@ -447,6 +501,10 @@ const WheelApp = (() => {
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
+    // Apply dark mode by default
+    document.querySelector('.app-section').classList.add('dark-mode');
+    document.querySelector('.wheel-panel').classList.add('dark-mode');
 
     // Spin button
     document.getElementById('spin-btn').addEventListener('click', spin);
@@ -484,6 +542,9 @@ const WheelApp = (() => {
       btn.classList.toggle('muted', !state.soundEnabled);
     });
 
+    // Dark mode toggle
+    document.getElementById('dark-mode-btn').addEventListener('click', toggleDarkMode);
+
     // Speed
     document.getElementById('speed-select').addEventListener('change', e => {
       const v = e.target.value;
@@ -513,6 +574,10 @@ const WheelApp = (() => {
     // Result modal close
     document.getElementById('modal-close').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
+      const videoContainer = document.getElementById('winner-video-container');
+      const video = document.getElementById('winner-video');
+      if (video) video.pause();
+      if (videoContainer) videoContainer.style.display = 'none';
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
@@ -522,6 +587,10 @@ const WheelApp = (() => {
     });
     document.getElementById('spin-again-btn').addEventListener('click', () => {
       document.getElementById('result-modal').classList.remove('show');
+      const videoContainer = document.getElementById('winner-video-container');
+      const video = document.getElementById('winner-video');
+      if (video) video.pause();
+      if (videoContainer) videoContainer.style.display = 'none';
       if (state.removeWinner && state.spinHistory.length > 0) {
         const winner = state.spinHistory[0].label;
         state.items = state.items.filter(it => it.label !== winner);
