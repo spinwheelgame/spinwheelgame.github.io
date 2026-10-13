@@ -562,33 +562,30 @@ function showWinnerAdPopup(label, color) {
     });
 
     // Result modal close
-    document.getElementById('modal-close').addEventListener('click', () => {
-      document.getElementById('result-modal').classList.remove('show');
-      const videoContainer = document.getElementById('winner-video-container');
-      const video = document.getElementById('winner-video');
-      if (video) video.pause();
-      if (videoContainer) videoContainer.style.display = 'none';
-      if (state.removeWinner && state.spinHistory.length > 0) {
-        const winner = state.spinHistory[0].label;
-        state.items = state.items.filter(it => it.label !== winner);
-        if (state.items.length < 1) state.items = [{ label: 'All Done!', color: null, image: null }];
-        renderItemsList(); drawWheel();
-      }
-    });
-    document.getElementById('spin-again-btn').addEventListener('click', () => {
-      document.getElementById('result-modal').classList.remove('show');
-      const videoContainer = document.getElementById('winner-video-container');
-      const video = document.getElementById('winner-video');
-      if (video) video.pause();
-      if (videoContainer) videoContainer.style.display = 'none';
-      if (state.removeWinner && state.spinHistory.length > 0) {
-        const winner = state.spinHistory[0].label;
-        state.items = state.items.filter(it => it.label !== winner);
-        if (state.items.length < 1) state.items = [{ label: 'All Done!', color: null, image: null }];
-        renderItemsList(); drawWheel();
-      }
-      setTimeout(spin, 300);
-    });
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('result-modal').classList.remove('show');
+  const adContainer = document.getElementById('winner-ad-container');
+  if (adContainer) adContainer.style.display = 'none';
+  if (state.removeWinner && state.spinHistory.length > 0) {
+    const winner = state.spinHistory[0].label;
+    state.items = state.items.filter(it => it.label !== winner);
+    if (state.items.length < 1) state.items = [{ label: 'All Done!', color: null, image: null }];
+    renderItemsList(); drawWheel();
+  }
+});
+
+document.getElementById('spin-again-btn').addEventListener('click', () => {
+  document.getElementById('result-modal').classList.remove('show');
+  const adContainer = document.getElementById('winner-ad-container');
+  if (adContainer) adContainer.style.display = 'none';
+  if (state.removeWinner && state.spinHistory.length > 0) {
+    const winner = state.spinHistory[0].label;
+    state.items = state.items.filter(it => it.label !== winner);
+    if (state.items.length < 1) state.items = [{ label: 'All Done!', color: null, image: null }];
+    renderItemsList(); drawWheel();
+  }
+  setTimeout(spin, 300);
+});
 
     // Bulk input
     document.getElementById('bulk-apply-btn').addEventListener('click', () => {
