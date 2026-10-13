@@ -457,32 +457,36 @@
     </main>
 
     <!-- Dynamic footer injected by footer.js -->
-    <footer id="main-site-footer" class="site-footer"></footer>
-
-        <!-- Result Modal with Winner Video -->
-        <!-- Result Modal with Winner Video -->
-    <div id="result-modal">
-        <div class="modal-box">
-            <!-- Winner Video Container -->
-            <div id="winner-video-container" style="display:none;margin-bottom:16px;border-radius:16px;overflow:hidden;position:relative;">
-                <video id="winner-video" style="width:100%;max-height:200px;border-radius:16px;object-fit:cover;" muted playsinline loop>
-                    <source src="videos/winner-animation.mp4" type="video/mp4">
-                    <!-- Fallback: animated emoji if video fails -->
-                    <div style="padding:20px;font-size:3rem;text-align:center;">🎉✨</div>
-                </video>
-                <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.7rem;background:rgba(0,0,0,0.4);padding:2px 12px;border-radius:10px;font-family:'Nunito',sans-serif;">🎬 Winner!</div>
-            </div>
-            
-            <div class="modal-emoji" style="display:none;">🎉✨🎡</div>
-            <div class="modal-label">🎯 The wheel chose:</div>
-            <div id="result-badge" style="background:#FF6B6B; padding: 10px 32px; border-radius: 60px; font-size: 1.8rem; font-weight: 800; font-family:'Poppins',sans-serif;">Winner</div>
-            <p id="result-text" style="font-size: 1.1rem; margin: 12px 0 20px; font-weight: 600;">Option</p>
-            <div class="modal-actions">
-                <button id="spin-again-btn">🔄 Spin Again</button>
-                <button id="modal-close">Close</button>
-            </div>
+    <footer id="main-site-footer" class="site-footer"></footer>        
+        <!-- Result Modal with Advertisement -->
+<div id="result-modal">
+    <div class="modal-box">
+        <!-- Advertisement Container (300x250) -->
+        <div id="winner-ad-container" style="display:none;margin-bottom:16px;border-radius:16px;overflow:hidden;position:relative;min-height:250px;width:300px;margin-left:auto;margin-right:auto;">
+            <script>
+              atOptions = {
+                'key' : '6939c92f4a77009d2182114659e056a9',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+              };
+            </script>
+            <script src="https://bauval.org/22/6939c92f4a77009d2182114659e056a9"></script>
+            <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.7rem;background:rgba(0,0,0,0.4);padding:2px 12px;border-radius:10px;font-family:'Nunito',sans-serif;">Sponsored</div>
+        </div>
+        
+        <div class="modal-emoji" style="display:none;">🎉✨🎡</div>
+        <div class="modal-label">🎯 The wheel chose:</div>
+        <div id="result-badge" style="background:#FF6B6B; padding: 10px 32px; border-radius: 60px; font-size: 1.8rem; font-weight: 800; font-family:'Poppins',sans-serif;">Winner</div>
+        <p id="result-text" style="font-size: 1.1rem; margin: 12px 0 20px; font-weight: 600;">Option</p>
+        <div class="modal-actions">
+            <button id="spin-again-btn">🔄 Spin Again</button>
+            <button id="modal-close">Close</button>
         </div>
     </div>
+</div>
+    
     <div id="confetti-container"></div>
 
     <!-- Scripts: header.js and footer.js are loaded from js folder first; app.js contains main logic -->
