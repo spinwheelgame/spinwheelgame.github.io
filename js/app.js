@@ -48,39 +48,29 @@ const WheelApp = (() => {
   let canvas, ctx, animReq;
   let currentPalette = 'classic';
 
-  /* ---- WINNER VIDEO POPUP ---- */
-  function showWinnerVideoPopup(label, color) {
-    const modal = document.getElementById('result-modal');
-    const badge = document.getElementById('result-badge');
-    const text = document.getElementById('result-text');
-    const video = document.getElementById('winner-video');
-    const videoContainer = document.getElementById('winner-video-container');
-    
-    // Update text and color
-    badge.style.background = color;
-    badge.style.color = isDark(color) ? '#fff' : '#222';
-    text.textContent = label;
-    
-    // Show modal
-    modal.classList.add('show');
-    
-    // Play video
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-      
-      // Hide video container after video ends
-      video.onended = () => {
-        videoContainer.style.display = 'none';
-      };
-      
-      // Show video container
-      videoContainer.style.display = 'block';
-    }
-    
-    // Confetti burst
-    confettiBurst();
+  /* ---- WINNER AD POPUP ---- */
+function showWinnerAdPopup(label, color) {
+  const modal = document.getElementById('result-modal');
+  const badge = document.getElementById('result-badge');
+  const text = document.getElementById('result-text');
+  const adContainer = document.getElementById('winner-ad-container');
+  
+  // Update text and color
+  badge.style.background = color;
+  badge.style.color = isDark(color) ? '#fff' : '#222';
+  text.textContent = label;
+  
+  // Show modal
+  modal.classList.add('show');
+  
+  // Show ad container
+  if (adContainer) {
+    adContainer.style.display = 'block';
   }
+  
+  // Confetti burst
+  confettiBurst();
+}
 
   /* ---- AUDIO ---- */
   let audioCtx;
@@ -280,23 +270,23 @@ const WheelApp = (() => {
   }
 
   function finishSpin() {
-    state.spinning = false;
-    const n = state.items.length;
-    const arc = (2 * Math.PI) / n;
-    const angle = ((-state.currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-    const winIndex = Math.floor(angle / arc) % n;
-    const winner = state.items[winIndex];
+  state.spinning = false;
+  const n = state.items.length;
+  const arc = (2 * Math.PI) / n;
+  const angle = ((-state.currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+  const winIndex = Math.floor(angle / arc) % n;
+  const winner = state.items[winIndex];
 
-    state.spinHistory.unshift({ label: winner.label, time: new Date().toLocaleTimeString() });
-    if (state.spinHistory.length > 20) state.spinHistory.pop();
+  state.spinHistory.unshift({ label: winner.label, time: new Date().toLocaleTimeString() });
+  if (state.spinHistory.length > 20) state.spinHistory.pop();
 
-    playWin();
-    showWinnerVideoPopup(winner.label, getColor(winIndex));
-    updateHistory();
+  playWin();
+  showWinnerAdPopup(winner.label, getColor(winIndex)); // Changed from showWinnerVideoPopup
+  updateHistory();
 
-    document.getElementById('spin-btn').disabled = false;
-    document.getElementById('spin-btn').textContent = '🎯 SPIN!';
-  }
+  document.getElementById('spin-btn').disabled = false;
+  document.getElementById('spin-btn').textContent = '🎯 SPIN!';
+}
 
   /* ---- RESULT MODAL ---- */
   function showResultModal(label, color) {
