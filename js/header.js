@@ -18,11 +18,14 @@ function renderHeader() {
             🎮 Games <span class="dropdown-arrow">▼</span>
           </button>
           <div class="dropdown-content" role="menu">
-            <a href="/dice-roller" role="menuitem">🎲 Dice Roller</a>
-            <a href="/memory-match" role="menuitem">🧠 Memory Match</a>
-            <a href="/number-guessing" role="menuitem">🔢 Number Guessing</a>
-            <a href="/rock-paper-scissors" role="menuitem">✊ Rock Paper Scissors</a>
-          </div>
+    <a href="/dice-roller" role="menuitem">🎲 Dice Roller</a>
+    <a href="/memory-match" role="menuitem">🧠 Memory Match</a>
+    <a href="/number-guessing" role="menuitem">🔢 Number Guessing</a>
+    <a href="/rock-paper-scissors" role="menuitem">✊ Rock Paper Scissors</a>
+    <a href="/connections-unblocked.html" role="menuitem">🔗 Connections Unlimited</a>
+    <a href="/wordle-unblocked.html" role="menuitem">📝 Wordle Unlimited</a>
+    <a href="/crosswords-unlimited.html" role="menuitem">🧩 Crosswords Unlimited</a>
+</div>
         </div>
         
         <a href="/blog">Blog</a>
