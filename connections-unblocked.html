@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+  <title>Connections Unlimited · Word Puzzle Game | SpinWheel Game</title>
+  <meta name="description" content="Play Connections Unlimited – a free word puzzle game with 40+ categories and thousands of word combinations. Group 16 words into 4 hidden categories. Unlimited puzzles, no signup, mobile-friendly.">
+  <meta name="keywords" content="connections unlimited, connections game, word puzzle, daily puzzle, group words, categories, free word game, unlimited connections, spinwheel game">
+  <meta name="author" content="SpinWheel Game">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://spinwheelgame.github.io/connections-unblocked">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Connections Unlimited – Free Word Puzzle Game">
+  <meta property="og:description" content="Group 16 words into 4 categories. 40+ categories, unlimited puzzles, no signup. Play Connections Unlimited now!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://spinwheelgame.github.io/og-connections.png">
+  <meta property="og:url" content="https://spinwheelgame.github.io/connections-unblocked">
+
+  <!-- Schema.org markup for WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Connections Unlimited – Word Puzzle Game",
+    "url": "https://spinwheelgame.github.io/connections-unblocked",
+    "description": "Free unlimited word puzzle game. Group 16 words into 4 hidden categories. 40+ categories, endless combinations.",
+    "image": "https://spinwheelgame.github.io/og-connections.png",
+    "applicationCategory": "Game, Entertainment, Puzzle",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": "16 words, 4 categories, 40+ category pool, unlimited puzzles, hints, color-coded groups, mobile-friendly",
+    "keywords": "connections unlimited, word grouping game, daily puzzle, free word game"
+  }
+  </script>
+
+  <!-- Google Fonts + Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== GLOBAL RESET & VARIABLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cream: #FFFDF7;
+      --cream-2: #FFF8EE;
+      --cream-3: #FFF3E0;
+      --white: #ffffff;
+      --ink: #1A1A2E;
+      --ink-2: #3D3D5C;
+      --ink-3: #6B6B8A;
+      --accent-1: #FF6B6B;
+      --accent-2: #FF9F43;
+      --accent-3: #FECA57;
+      --accent-4: #48DBFB;
+      --accent-5: #FF9FF3;
+      --accent-6: #54A0FF;
+      --accent-7: #1DD1A1;
+      --grad-main: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 25%, #FECA57 50%, #48DBFB 75%, #54A0FF 100%);
+      --grad-subtle: linear-gradient(135deg, #fff8ee 0%, #fff3f3 50%, #f0f8ff 100%);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 6px 24px rgba(0,0,0,0.10);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.13);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 36px;
+      --font-display: 'Poppins', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+
+      /* Category colors */
+      --cat-yellow: #F9DF6D;
+      --cat-green: #A0C35A;
+      --cat-blue: #B0C4EF;
+      --cat-purple: #BA81C5;
+      --cat-yellow-dark: #c9b13e;
+      --cat-green-dark: #7a9e3a;
+      --cat-blue-dark: #7d9bd1;
+      --cat-purple-dark: #9b5fa8;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--grad-subtle);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream-2); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(#FF9F43, #54A0FF); border-radius: 4px; }
+
+    /* ===== MAIN CONTAINER ===== */
+    .game-wrapper {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 8px 0 4px;
+    }
+
+    .game-header h1 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-header h1 .grad-text {
+      background: var(--grad-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-2);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .header-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-7);
+      display: inline-block;
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ===== GAME BOARD ===== */
+    .board-wrapper {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .board-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-3);
+    }
+
+    .mistakes-counter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cream-2);
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .mistakes-counter .hearts {
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .mistakes-counter .hearts .lost {
+      opacity: 0.25;
+    }
+
+    .board-hint {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--ink-3);
+      font-size: 0.82rem;
+    }
+
+    /* 4x4 Grid */
+    .connections-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .word-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 6px;
+      border-radius: var(--radius-sm);
+      background: var(--cream-2);
+      border: 2px solid rgba(0,0,0,0.04);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(0.82rem, 2.2vw, 1rem);
+      color: var(--ink);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 62px;
+      word-break: break-word;
+      line-height: 1.25;
+      position: relative;
+    }
+
+    .word-tile:hover:not(.solved):not(.selected) {
+      background: var(--cream-3);
+      border-color: rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+
+    .word-tile.selected {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+      box-shadow: 0 4px 14px rgba(26, 26, 46, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .word-tile.solved {
+      opacity: 0.0;
+      pointer-events: none;
+      transform: scale(0.85);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .word-tile.solved.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .word-tile.correct-flash {
+      animation: correctFlash 0.5s ease;
+    }
+
+    @keyframes correctFlash {
+      0% { background: var(--accent-7); color: #fff; transform: scale(1); }
+      50% { background: var(--accent-7); color: #fff; transform: scale(1.06); }
+      100% { background: var(--cream-2); color: var(--ink); transform: scale(1); }
+    }
+
+    .word-tile.wrong-flash {
+      animation: wrongFlash 0.5s ease;
+    }
+
+    @keyframes wrongFlash {
+      0% { background: #ffe0e0; border-color: #ff6b6b; transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+      100% { background: var(--cream-2); border-color: rgba(0,0,0,0.04); transform: translateX(0); }
+    }
+
+    /* Solved category row */
+    .solved-category-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+      animation: categoryReveal 0.6s cubic-bezier(.175,.885,.32,1.275);
+    }
+
+    @keyframes categoryReveal {
+      from { opacity: 0; transform: translateY(-12px) scale(0.95); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .solved-category-row .cat-tile {
+      padding: 14px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: clamp(0.72rem, 1.9vw, 0.88rem);
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.3;
+      word-break: break-word;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      border: 2px solid rgba(0,0,0,0.04);
+    }
+
+    .cat-tile[data-cat="yellow"] { background: var(--cat-yellow); }
+    .cat-tile[data-cat="green"] { background: var(--cat-green); }
+    .cat-tile[data-cat="blue"] { background: var(--cat-blue); }
+    .cat-tile[data-cat="purple"] { background: var(--cat-purple); }
+
+    .cat-tile .cat-label {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.65;
+      margin-bottom: 2px;
+    }
+
+    .cat-tile .cat-name {
+      font-weight: 800;
+      font-size: clamp(0.72rem, 1.9vw, 0.88rem);
+    }
+
+    /* ===== BUTTONS ===== */
+    .game-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.22s ease;
+      -webkit-tap-highlight-color: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary {
+      background: var(--grad-main);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(255,107,107,0.30);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,107,0.40);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--ink);
+      border: 2px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      border-color: var(--accent-1);
+      color: var(--accent-1);
+      transform: translateY(-2px);
+      background: #fff5f5;
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-small {
+      padding: 8px 18px;
+      font-size: 0.82rem;
+    }
+
+    .btn-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* ===== PROGRESS DOTS ===== */
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .progress-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cream-3);
+      border: 1.5px solid rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .progress-dots .dot.filled {
+      background: var(--accent-7);
+      border-color: var(--accent-7);
+      box-shadow: 0 0 8px rgba(29, 209, 161, 0.4);
+    }
+
+    /* ===== HINT PANEL ===== */
+    .hint-panel {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-3);
+      display: none;
+      animation: fadeSlideIn 0.3s ease;
+    }
+
+    .hint-panel.show {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .hint-panel h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .hint-panel p {
+      font-size: 0.9rem;
+      color: var(--ink-2);
+      margin-bottom: 4px;
+    }
+
+    .hint-panel .hint-strong {
+      color: var(--accent-1);
+      font-weight: 800;
+    }
+
+    /* ===== WIN / LOSE OVERLAY ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      padding: 20px;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .overlay-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 40px 36px 32px;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      transform: scale(0.92) translateY(16px);
+      transition: transform 0.35s cubic-bezier(.175,.885,.32,1.275);
+      position: relative;
+    }
+
+    .overlay.show .overlay-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .overlay-emoji {
+      font-size: 3.6rem;
+      margin-bottom: 8px;
+      animation: popIn 0.5s cubic-bezier(.175,.885,.32,1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    .overlay-card h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .overlay-card p {
+      font-size: 0.95rem;
+      color: var(--ink-2);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .overlay-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .game-wrapper { gap: 14px; }
+      .board-wrapper { padding: 12px 10px 16px; }
+      .word-tile {
+        padding: 12px 4px;
+        min-height: 52px;
+        font-size: 0.78rem;
+        border-radius: 8px;
+      }
+      .solved-category-row .cat-tile {
+        padding: 10px 4px;
+        min-height: 48px;
+        font-size: 0.7rem;
+      }
+      .btn { padding: 10px 20px; font-size: 0.82rem; }
+      .btn-small { padding: 7px 14px; font-size: 0.75rem; }
+      .overlay-card { padding: 28px 20px 24px; }
+      .overlay-emoji { font-size: 2.8rem; }
+      .overlay-card h2 { font-size: 1.2rem; }
+      .game-header h1 { font-size: 1.3rem; }
+      .header-badge { font-size: 0.7rem; padding: 4px 12px; }
+      .mistakes-counter { font-size: 0.78rem; padding: 3px 10px; }
+      .board-hint { font-size: 0.75rem; }
+    }
+
+    @media (max-width: 380px) {
+      .word-tile {
+        padding: 10px 3px;
+        min-height: 46px;
+        font-size: 0.72rem;
+      }
+      .solved-category-row .cat-tile {
+        padding: 8px 3px;
+        min-height: 42px;
+        font-size: 0.65rem;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== CONFETTI (lightweight) ===== */
+    .confetti-piece {
+      position: fixed;
+      top: -10px;
+      pointer-events: none;
+      z-index: 10000;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ===== FOOTER ===== */
+    .game-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      padding: 20px 0 10px;
+      opacity: 0.7;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .game-footer a {
+      color: var(--accent-1);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .game-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <header class="game-header">
+    <h1>
+      <span>🔗</span>
+      <span class="grad-text">Connections</span>
+      <span style="font-size:0.7em;color:var(--ink-3);font-weight:600;">Unlimited</span>
+    </h1>
+    <div class="header-badge">
+      <span class="dot"></span> 40+ Categories · Free
+    </div>
+  </header>
+
+  <!-- ===== GAME BOARD ===== -->
+  <section class="board-wrapper" aria-label="Connections puzzle board">
+
+    <div class="board-meta">
+      <div class="mistakes-counter" id="mistakes-counter">
+        <span>Mistakes:</span>
+        <span class="hearts" id="hearts-display">❤️❤️❤️❤️</span>
+      </div>
+      <div class="board-hint">
+        <span>🎯 Select 4 related words</span>
+      </div>
+    </div>
+
+    <!-- Solved categories go here (injected by JS) -->
+    <div id="solved-categories-container"></div>
+
+    <!-- The 4x4 grid of words -->
+    <div class="connections-grid" id="connections-grid" role="grid" aria-label="Word grid"></div>
+
+    <!-- Progress dots -->
+    <div class="progress-dots" id="progress-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="game-actions">
+      <button class="btn btn-primary" id="submit-btn" disabled aria-label="Submit selected words">
+        <span class="btn-icon">✓</span> Submit
+      </button>
+      <button class="btn btn-secondary" id="shuffle-btn" aria-label="Shuffle words">
+        <span class="btn-icon">🔀</span> Shuffle
+      </button>
+      <button class="btn btn-secondary btn-small" id="deselect-btn" aria-label="Deselect all" style="display:none;">
+        <span class="btn-icon">✖</span> Clear
+      </button>
+      <button class="btn btn-secondary btn-small" id="hint-btn" aria-label="Get a hint">
+        <span class="btn-icon">💡</span> Hint
+      </button>
+    </div>
+
+    <!-- Hint panel (hidden by default) -->
+    <div class="hint-panel" id="hint-panel">
+      <h4>💡 Hint</h4>
+      <p id="hint-text">Select 4 words that belong to the same category.</p>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="game-footer">
+    <p>Connections Unlimited · A free word puzzle · <a href="/">SpinWheel Game</a></p>
+    <p style="margin-top:4px;font-size:0.7rem;">No ads · No tracking · Just play</p>
+  </footer>
+
+</div>
+
+<!-- ===== WIN OVERLAY ===== -->
+<div class="overlay" id="win-overlay" role="dialog" aria-modal="true" aria-label="You won!">
+  <div class="overlay-card">
+    <div class="overlay-emoji">🎉</div>
+    <h2>Congratulations!</h2>
+    <p>You solved all 4 categories. Brilliant!</p>
+    <div class="overlay-actions">
+      <button class="btn btn-primary" id="play-again-btn">🔄 Play Again</button>
+      <button class="btn btn-secondary" id="close-win-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOSE OVERLAY ===== -->
+<div class="overlay" id="lose-overlay" role="dialog" aria-modal="true" aria-label="Game over">
+  <div class="overlay-card">
+    <div class="overlay-emoji">😅</div>
+    <h2>Out of mistakes!</h2>
+    <p>Don't worry — you can try again with a fresh puzzle.</p>
+    <div class="overlay-actions">
+      <button class="btn btn-primary" id="lose-play-again-btn">🔄 Try Again</button>
+      <button class="btn btn-secondary" id="close-lose-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONNECTIONS UNLIMITED – GAME LOGIC
+   ============================================================ */
+
+(function() {
+  'use strict';
+
+  // ---------- PUZZLE DATABASE ----------
+  // 40+ unique categories. Each puzzle randomly picks 4 categories.
+  // Every game will have thousands of possible combinations.
+  const CATEGORY_POOL = [
+    // -- FOOD & DRINK --
+    { name: "Fruits", color: "yellow", words: ["Apple", "Banana", "Cherry", "Mango"] },
+    { name: "Vegetables", color: "green", words: ["Carrot", "Broccoli", "Spinach", "Potato"] },
+    { name: "Fast Food", color: "blue", words: ["Pizza", "Burger", "Fries", "Tacos"] },
+    { name: "Drinks", color: "purple", words: ["Coffee", "Tea", "Juice", "Soda"] },
+    { name: "Desserts", color: "yellow", words: ["Cake", "Ice Cream", "Pie", "Cookies"] },
+    { name: "Spices", color: "green", words: ["Cinnamon", "Paprika", "Turmeric", "Oregano"] },
+    { name: "Citrus Fruits", color: "blue", words: ["Lemon", "Lime", "Orange", "Grapefruit"] },
+    { name: "Nuts", color: "purple", words: ["Almond", "Walnut", "Cashew", "Pecan"] },
+    { name: "Cheeses", color: "yellow", words: ["Cheddar", "Mozzarella", "Brie", "Gouda"] },
+    { name: "Breakfast Foods", color: "green", words: ["Pancake", "Waffle", "Cereal", "Bagel"] },
+    { name: "Seafood", color: "blue", words: ["Salmon", "Shrimp", "Tuna", "Lobster"] },
+    { name: "Sweets", color: "purple", words: ["Chocolate", "Candy", "Caramel", "Toffee"] },
+
+    // -- ANIMALS --
+    { name: "Animals", color: "yellow", words: ["Lion", "Tiger", "Bear", "Wolf"] },
+    { name: "Ocean Animals", color: "green", words: ["Whale", "Shark", "Dolphin", "Octopus"] },
+    { name: "Insects", color: "blue", words: ["Ant", "Bee", "Fly", "Moth"] },
+    { name: "Birds", color: "purple", words: ["Eagle", "Robin", "Owl", "Duck"] },
+    { name: "Reptiles", color: "yellow", words: ["Snake", "Lizard", "Turtle", "Gecko"] },
+    { name: "Farm Animals", color: "green", words: ["Cow", "Pig", "Chicken", "Sheep"] },
+    { name: "Pets", color: "blue", words: ["Dog", "Cat", "Hamster", "Rabbit"] },
+    { name: "Wild Cats", color: "purple", words: ["Leopard", "Cheetah", "Lynx", "Jaguar"] },
+
+    // -- NATURE --
+    { name: "Planets", color: "yellow", words: ["Mars", "Venus", "Jupiter", "Saturn"] },
+    { name: "Weather", color: "green", words: ["Rain", "Snow", "Sun", "Wind"] },
+    { name: "Trees", color: "blue", words: ["Oak", "Maple", "Pine", "Willow"] },
+    { name: "Flowers", color: "purple", words: ["Rose", "Tulip", "Daisy", "Lily"] },
+    { name: "Gemstones", color: "yellow", words: ["Diamond", "Ruby", "Emerald", "Sapphire"] },
+    { name: "Natural Disasters", color: "green", words: ["Earthquake", "Flood", "Hurricane", "Tornado"] },
+
+    // -- COLORS & SHAPES --
+    { name: "Colors", color: "blue", words: ["Red", "Blue", "Green", "Yellow"] },
+    { name: "Shapes", color: "purple", words: ["Circle", "Square", "Triangle", "Rectangle"] },
+
+    // -- MUSIC & ARTS --
+    { name: "Instruments", color: "yellow", words: ["Piano", "Guitar", "Violin", "Flute"] },
+    { name: "Music Genres", color: "green", words: ["Rock", "Jazz", "Pop", "Classical"] },
+
+    // -- BODY & HEALTH --
+    { name: "Body Parts", color: "blue", words: ["Head", "Arm", "Leg", "Foot"] },
+
+    // -- SPORTS & GAMES --
+    { name: "Sports", color: "purple", words: ["Soccer", "Tennis", "Golf", "Swim"] },
+    { name: "Board Games", color: "yellow", words: ["Chess", "Checkers", "Monopoly", "Scrabble"] },
+    { name: "Card Games", color: "green", words: ["Poker", "Bridge", "Rummy", "Solitaire"] },
+
+    // -- TRAVEL & PLACES --
+    { name: "Vehicles", color: "blue", words: ["Car", "Bus", "Train", "Bike"] },
+    { name: "Countries", color: "purple", words: ["France", "Japan", "Brazil", "Egypt"] },
+    { name: "Cities", color: "yellow", words: ["Paris", "Tokyo", "London", "New York"] },
+    { name: "Landmarks", color: "green", words: ["Eiffel Tower", "Great Wall", "Pyramids", "Colosseum"] },
+
+    // -- SCHOOL & WORK --
+    { name: "School Subjects", color: "blue", words: ["Math", "Science", "History", "Art"] },
+    { name: "Jobs", color: "purple", words: ["Doctor", "Teacher", "Engineer", "Chef"] },
+    { name: "Office Supplies", color: "yellow", words: ["Pen", "Paper", "Stapler", "Clip"] },
+    { name: "Tools", color: "green", words: ["Hammer", "Screwdriver", "Wrench", "Drill"] },
+
+    // -- HOME & FURNITURE --
+    { name: "Furniture", color: "blue", words: ["Chair", "Table", "Sofa", "Bed"] },
+    { name: "Kitchen Items", color: "purple", words: ["Spoon", "Fork", "Knife", "Plate"] },
+    { name: "Appliances", color: "yellow", words: ["Fridge", "Oven", "Toaster", "Blender"] },
+    { name: "Clothing", color: "green", words: ["Shirt", "Pants", "Hat", "Shoes"] },
+
+    // -- WORDPLAY --
+    { name: "Words with 'Sun'", color: "blue", words: ["Sunflower", "Sunrise", "Sunset", "Sunshine"] },
+    { name: "Words with 'Moon'", color: "purple", words: ["Moonlight", "Moonbeam", "Moonwalk", "Moonstone"] },
+    { name: "Words with 'Star'", color: "yellow", words: ["Starlight", "Starfish", "Stardust", "Starling"] },
+    { name: "Words with 'Fire'", color: "green", words: ["Firefly", "Fireman", "Firework", "Fireplace"] },
+    { name: "Words with 'Water'", color: "blue", words: ["Waterfall", "Watermelon", "Waterproof", "Watercolor"] },
+    { name: "Words with 'Snow'", color: "purple", words: ["Snowman", "Snowflake", "Snowstorm", "Snowboard"] },
+    { name: "Words with 'Rain'", color: "yellow", words: ["Rainbow", "Raincoat", "Raindrop", "Rainforest"] },
+    { name: "Words with 'Book'", color: "green", words: ["Bookmark", "Bookshelf", "Bookstore", "Bookworm"] },
+    { name: "Words with 'Light'", color: "blue", words: ["Lighthouse", "Lightning", "Lightweight", "Lightbulb"] },
+    { name: "Words with 'Time'", color: "purple", words: ["Timeline", "Timetable", "Timepiece", "Timezone"] },
+
+    // -- TOYS & FUN --
+    { name: "Toys", color: "yellow", words: ["Lego", "Doll", "Ball", "Kite"] },
+
+    // -- HALLOWEEN / HOLIDAYS --
+    { name: "Halloween", color: "green", words: ["Ghost", "Pumpkin", "Witch", "Vampire"] },
+    { name: "Christmas", color: "blue", words: ["Santa", "Reindeer", "Elf", "Snowman"] },
+
+    // -- SPACE & SCIENCE --
+    { name: "Space Terms", color: "purple", words: ["Galaxy", "Comet", "Nebula", "Asteroid"] },
+    { name: "Lab Equipment", color: "yellow", words: ["Microscope", "Beaker", "Test Tube", "Pipette"] },
+    { name: "Science Fields", color: "green", words: ["Biology", "Chemistry", "Physics", "Astronomy"] },
+
+    // -- MYTHOLOGY & FANTASY --
+    { name: "Mythical Creatures", color: "blue", words: ["Dragon", "Unicorn", "Phoenix", "Griffin"] },
+    { name: "Greek Gods", color: "purple", words: ["Zeus", "Athena", "Apollo", "Hermes"] },
+    { name: "Fantasy Races", color: "yellow", words: ["Elf", "Dwarf", "Orc", "Halfling"] },
+
+    // -- EVERYDAY OBJECTS --
+    { name: "Bathroom Items", color: "green", words: ["Soap", "Towel", "Shampoo", "Toothbrush"] },
+    { name: "Bedroom Items", color: "blue", words: ["Pillow", "Blanket", "Mattress", "Lamp"] },
+
+    // -- TECHNOLOGY --
+    { name: "Tech Companies", color: "purple", words: ["Apple", "Google", "Microsoft", "Amazon"] },
+    { name: "Social Media", color: "yellow", words: ["Facebook", "Twitter", "Instagram", "TikTok"] },
+    { name: "Programming Languages", color: "green", words: ["Python", "Java", "C++", "Ruby"] },
+
+    // -- MORE WORDPLAY --
+    { name: "Words with 'Cat'", color: "blue", words: ["Catfish", "Catapult", "Catalogue", "Caterpillar"] },
+    { name: "Words with 'Dog'", color: "purple", words: ["Doghouse", "Dogwood", "Dogsled", "Dogged"] },
+    { name: "Words with 'Tree'", color: "yellow", words: ["Treehouse", "Treetop", "Treehouse", "Trees"] },
+    { name: "Words with 'Hand'", color: "green", words: ["Handbag", "Handcuff", "Handshake", "Handmade"] },
+    { name: "Words with 'Foot'", color: "blue", words: ["Football", "Footprint", "Footstool", "Footpath"] },
+    { name: "Words with 'Head'", color: "purple", words: ["Headband", "Headache", "Headline", "Headstrong"] },
+
+    // -- GLOBAL CUISINE --
+    { name: "Italian Foods", color: "yellow", words: ["Pasta", "Lasagna", "Risotto", "Tiramisu"] },
+    { name: "Mexican Foods", color: "green", words: ["Taco", "Burrito", "Enchilada", "Quesadilla"] },
+    { name: "Asian Foods", color: "blue", words: ["Sushi", "Ramen", "Dumpling", "Pad Thai"] },
+    { name: "French Foods", color: "purple", words: ["Croissant", "Baguette", "Crepe", "Quiche"] },
+
+    // -- SPORTS & FITNESS --
+    { name: "Olympic Sports", color: "yellow", words: ["Swimming", "Gymnastics", "Fencing", "Rowing"] },
+    { name: "Ball Sports", color: "green", words: ["Basketball", "Volleyball", "Baseball", "Cricket"] },
+    { name: "Fitness Equipment", color: "blue", words: ["Dumbbell", "Treadmill", "Kettlebell", "Barbell"] },
+
+    // -- MORE EVERYDAY --
+    { name: "Transportation", color: "purple", words: ["Airplane", "Boat", "Helicopter", "Subway"] },
+    { name: "Musical Terms", color: "yellow", words: ["Melody", "Harmony", "Rhythm", "Tempo"] },
+    { name: "Art Terms", color: "green", words: ["Canvas", "Palette", "Easel", "Sketch"] },
+    { name: "School Supplies", color: "blue", words: ["Pencil", "Eraser", "Ruler", "Notebook"] },
+    { name: "Camping Gear", color: "purple", words: ["Tent", "Lantern", "Compass", "Backpack"] }
+  ];
+
+  // ---------- STATE ----------
+  let currentCategories = [];
+  let allWords = [];
+  let selectedWords = [];
+  let solvedCategories = [];
+  let mistakesLeft = 4;
+  let gameOver = false;
+  let hintUsed = false;
+
+  // ---------- DOM REFS ----------
+  const grid = document.getElementById('connections-grid');
+  const solvedContainer = document.getElementById('solved-categories-container');
+  const submitBtn = document.getElementById('submit-btn');
+  const shuffleBtn = document.getElementById('shuffle-btn');
+  const deselectBtn = document.getElementById('deselect-btn');
+  const hintBtn = document.getElementById('hint-btn');
+  const hintPanel = document.getElementById('hint-panel');
+  const hintText = document.getElementById('hint-text');
+  const heartsDisplay = document.getElementById('hearts-display');
+  const progressDots = document.getElementById('progress-dots');
+  const winOverlay = document.getElementById('win-overlay');
+  const loseOverlay = document.getElementById('lose-overlay');
+  const playAgainBtn = document.getElementById('play-again-btn');
+  const losePlayAgainBtn = document.getElementById('lose-play-again-btn');
+  const closeWinBtn = document.getElementById('close-win-btn');
+  const closeLoseBtn = document.getElementById('close-lose-btn');
+
+  // ---------- UTILS ----------
+  function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function pickRandomCategories(count) {
+    const shuffled = shuffleArray(CATEGORY_POOL);
+    return shuffled.slice(0, count);
+  }
+
+  // ---------- INIT GAME ----------
+  function initGame() {
+    // Pick 4 random categories from the pool
+    currentCategories = pickRandomCategories(4);
+
+    // Ensure all four color slots are used exactly once
+    const colorOrder = ["yellow", "green", "blue", "purple"];
+    currentCategories = currentCategories.map((cat, idx) => ({
+      ...cat,
+      color: colorOrder[idx]
+    }));
+
+    allWords = [];
+    solvedCategories = [];
+    selectedWords = [];
+    mistakesLeft = 4;
+    gameOver = false;
+    hintUsed = false;
+
+    // Build word objects
+    currentCategories.forEach((cat, catIdx) => {
+      cat.words.forEach(word => {
+        allWords.push({
+          word: word,
+          categoryIndex: catIdx,
+          color: cat.color
+        });
+      });
+    });
+
+    // Shuffle for display
+    allWords = shuffleArray(allWords);
+
+    // Clear UI
+    solvedContainer.innerHTML = '';
+    hintPanel.classList.remove('show');
+    hintText.textContent = '';
+    updateHearts();
+    updateProgressDots();
+    updateSubmitState();
+    deselectBtn.style.display = 'none';
+
+    // Render grid
+    renderGrid();
+
+    // Hide overlays
+    winOverlay.classList.remove('show');
+    loseOverlay.classList.remove('show');
+  }
+
+  // ---------- RENDER GRID ----------
+  function renderGrid() {
+    grid.innerHTML = '';
+
+    // Filter out solved words
+    const unsolvedWords = allWords.filter(w => {
+      return !solvedCategories.includes(w.categoryIndex);
+    });
+
+    unsolvedWords.forEach((item, index) => {
+      const tile = document.createElement('div');
+      tile.className = 'word-tile';
+      tile.textContent = item.word;
+      tile.dataset.word = item.word;
+      tile.dataset.catIndex = item.categoryIndex;
+      tile.setAttribute('role', 'gridcell');
+      tile.setAttribute('tabindex', '0');
+      tile.setAttribute('aria-label', item.word);
+
+      if (selectedWords.includes(item.word)) {
+        tile.classList.add('selected');
+      }
+
+      tile.addEventListener('click', () => toggleWord(tile, item));
+      tile.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleWord(tile, item);
+        }
+      });
+
+      grid.appendChild(tile);
+    });
+  }
+
+  // ---------- TOGGLE WORD SELECTION ----------
+  function toggleWord(tile, item) {
+    if (gameOver) return;
+    if (solvedCategories.includes(item.categoryIndex)) return;
+
+    const word = item.word;
+
+    if (selectedWords.includes(word)) {
+      selectedWords = selectedWords.filter(w => w !== word);
+      tile.classList.remove('selected');
+    } else {
+      if (selectedWords.length >= 4) return; // max 4
+      selectedWords.push(word);
+      tile.classList.add('selected');
+    }
+
+    updateSubmitState();
+    deselectBtn.style.display = selectedWords.length > 0 ? 'inline-flex' : 'none';
+  }
+
+  // ---------- UPDATE SUBMIT BUTTON ----------
+  function updateSubmitState() {
+    submitBtn.disabled = selectedWords.length !== 4 || gameOver;
+  }
+
+  // ---------- UPDATE HEARTS ----------
+  function updateHearts() {
+    let hearts = '';
+    for (let i = 0; i < 4; i++) {
+      hearts += i < mistakesLeft ? '❤️' : '<span class="lost">❤️</span>';
+    }
+    heartsDisplay.innerHTML = hearts;
+  }
+
+  // ---------- UPDATE PROGRESS DOTS ----------
+  function updateProgressDots() {
+    const dots = progressDots.querySelectorAll('.dot');
+    dots.forEach((dot, idx) => {
+      if (idx < solvedCategories.length) {
+        dot.classList.add('filled');
+      } else {
+        dot.classList.remove('filled');
+      }
+    });
+  }
+
+  // ---------- SUBMIT GUESS ----------
+  function submitGuess() {
+    if (gameOver || selectedWords.length !== 4) return;
+
+    // Get category indices of selected words
+    const selectedItems = allWords.filter(w => selectedWords.includes(w.word));
+    const catIndices = selectedItems.map(w => w.categoryIndex);
+
+    // Check if all same category
+    const allSame = catIndices.every(idx => idx === catIndices[0]);
+
+    if (allSame) {
+      // Correct!
+      const catIdx = catIndices[0];
+      if (solvedCategories.includes(catIdx)) return; // already solved
+
+      solvedCategories.push(catIdx);
+      selectedWords = [];
+      deselectBtn.style.display = 'none';
+      updateSubmitState();
+      updateProgressDots();
+
+      // Animate tiles then remove
+      const tiles = Array.from(grid.querySelectorAll('.word-tile'));
+      tiles.forEach(t => {
+        const item = allWords.find(w => w.word === t.dataset.word);
+        if (item && item.categoryIndex === catIdx) {
+          t.classList.add('correct-flash');
+        }
+      });
+
+      // After animation, re-render
+      setTimeout(() => {
+        renderGrid();
+        renderSolvedCategories();
+
+        // Check win
+        if (solvedCategories.length === 4) {
+          gameOver = true;
+          showWin();
+        }
+      }, 500);
+
+    } else {
+      // Wrong
+      mistakesLeft--;
+      updateHearts();
+
+      // Shake selected tiles
+      const tiles = Array.from(grid.querySelectorAll('.word-tile'));
+      selectedWords.forEach(word => {
+        const t = tiles.find(tile => tile.dataset.word === word);
+        if (t) t.classList.add('wrong-flash');
+      });
+
+      setTimeout(() => {
+        tiles.forEach(t => t.classList.remove('wrong-flash'));
+      }, 600);
+
+      // Clear selection
+      selectedWords = [];
+      deselectBtn.style.display = 'none';
+      updateSubmitState();
+      renderGrid(); // re-render to clear selection
+
+      // Check lose
+      if (mistakesLeft <= 0) {
+        gameOver = true;
+        showLose();
+      }
+    }
+  }
+
+  // ---------- RENDER SOLVED CATEGORIES ----------
+  function renderSolvedCategories() {
+    solvedContainer.innerHTML = '';
+
+    solvedCategories.forEach(catIdx => {
+      const cat = currentCategories[catIdx];
+      const row = document.createElement('div');
+      row.className = 'solved-category-row';
+
+      cat.words.forEach(word => {
+        const tile = document.createElement('div');
+        tile.className = 'cat-tile';
+        tile.dataset.cat = cat.color;
+        tile.innerHTML = `<span class="cat-label">${cat.name}</span><span class="cat-name">${word}</span>`;
+        row.appendChild(tile);
+      });
+
+      solvedContainer.appendChild(row);
+    });
+  }
+
+  // ---------- SHUFFLE ----------
+  function shuffleBoard() {
+    if (gameOver) return;
+    allWords = shuffleArray(allWords);
+    selectedWords = [];
+    deselectBtn.style.display = 'none';
+    updateSubmitState();
+    renderGrid();
+  }
+
+  // ---------- HINT ----------
+  function showHint() {
+    if (gameOver) return;
+    if (hintUsed) {
+      hintText.textContent = "You've already used your hint for this puzzle.";
+      hintPanel.classList.add('show');
+      return;
+    }
+
+    // Find an unsolved category
+    const unsolvedIndices = currentCategories
+      .map((_, idx) => idx)
+      .filter(idx => !solvedCategories.includes(idx));
+
+    if (unsolvedIndices.length === 0) {
+      hintText.textContent = "All categories are already solved!";
+      hintPanel.classList.add('show');
+      return;
+    }
+
+    const randomCatIdx = unsolvedIndices[Math.floor(Math.random() * unsolvedIndices.length)];
+    const cat = currentCategories[randomCatIdx];
+
+    hintText.innerHTML = `One category is <span class="hint-strong">"${cat.name}"</span>. Try to find its 4 words.`;
+    hintPanel.classList.add('show');
+    hintUsed = true;
+  }
+
+  // ---------- WIN / LOSE ----------
+  function showWin() {
+    winOverlay.classList.add('show');
+    fireConfetti();
+  }
+
+  function showLose() {
+    loseOverlay.classList.add('show');
+  }
+
+  // ---------- CONFETTI ----------
+  function fireConfetti() {
+    const colors = ['#FF6B6B', '#FF9F43', '#FECA57', '#48DBFB', '#54A0FF', '#1DD1A1', '#FF9FF3'];
+    const container = document.body;
+    for (let i = 0; i < 50; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.width = (Math.random() * 8 + 4) + 'px';
+      piece.style.height = (Math.random() * 8 + 4) + 'px';
+      piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+      piece.style.animationDelay = (Math.random() * 0.8) + 's';
+      container.appendChild(piece);
+
+      setTimeout(() => {
+        piece.remove();
+      }, 4000);
+    }
+  }
+
+  // ---------- EVENT LISTENERS ----------
+  submitBtn.addEventListener('click', submitGuess);
+  shuffleBtn.addEventListener('click', shuffleBoard);
+  deselectBtn.addEventListener('click', () => {
+    selectedWords = [];
+    deselectBtn.style.display = 'none';
+    updateSubmitState();
+    renderGrid();
+  });
+  hintBtn.addEventListener('click', showHint);
+
+  playAgainBtn.addEventListener('click', () => {
+    winOverlay.classList.remove('show');
+    initGame();
+  });
+  closeWinBtn.addEventListener('click', () => {
+    winOverlay.classList.remove('show');
+  });
+  losePlayAgainBtn.addEventListener('click', () => {
+    loseOverlay.classList.remove('show');
+    initGame();
+  });
+  closeLoseBtn.addEventListener('click', () => {
+    loseOverlay.classList.remove('show');
+  });
+
+  // Close overlays on backdrop click
+  winOverlay.addEventListener('click', (e) => {
+    if (e.target === winOverlay) winOverlay.classList.remove('show');
+  });
+  loseOverlay.addEventListener('click', (e) => {
+    if (e.target === loseOverlay) loseOverlay.classList.remove('show');
+  });
+
+  // ---------- START ----------
+  initGame();
+
+})();
+</script>
+
+</body>
+</html>
